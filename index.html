@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yasmin Santos · AI Builder</title>
+<meta name="description" content="Portfólio de IA aplicada a negócios: agentes, prompts avaliados, automação e análise de dados, em dois projetos publicados.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --fundo: #fffaf3;
+  --tinta: #1d1418;
+  --tinta-2: #4f4549;
+  --tinta-3: #7a6f73;
+  --linha: #efe4dc;
+  --branco: #ffffff;
+
+  /* Central de reviews: vermelho, laranja e amarelo */
+  --r1: #da291c; --r2: #8f1810; --r3: #f08a1c; --r4: #ffbc0d; --r-claro: #fff1e6;
+  /* Assistente de compras: rosa */
+  --p1: #b3124f; --p2: #7d0a37; --p3: #e0457f; --p4: #f6b3cb; --p-claro: #fdf0f5;
+  /* destaques gerais */
+  --roxo: #5b2be0; --verde: #12a36a;
+
+  --raio: 22px;
+  --sombra: 0 1px 2px rgba(29,20,24,.05), 0 12px 32px rgba(29,20,24,.07);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--fundo); color: var(--tinta);
+  font-family: 'Inter', system-ui, sans-serif; font-size: 17px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+h1, h2, h3, .num, .marca { font-family: 'Space Grotesk', 'Inter', sans-serif; letter-spacing: -0.02em; line-height: 1.1; }
+a { color: inherit; }
+img, video, iframe { max-width: 100%; }
+.envelope { width: min(1180px, 100% - 32px); margin-inline: auto; }
+
+/* ---------- navegação */
+nav {
+  position: sticky; top: 12px; z-index: 50; margin: 12px auto 0; width: min(1180px, 100% - 32px);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  background: rgba(255,255,255,.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--linha); border-radius: 999px; padding: 8px 8px 8px 20px; box-shadow: var(--sombra);
+}
+.marca { font-weight: 700; font-size: 1.05rem; text-decoration: none; white-space: nowrap; }
+.marca span { background: linear-gradient(90deg, var(--r1), var(--p3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+nav ul { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; flex-wrap: wrap; justify-content: flex-end; }
+nav a.item { display: block; padding: 7px 14px; border-radius: 999px; text-decoration: none; font-size: .9rem; font-weight: 600; color: var(--tinta-2); }
+nav a.item:hover { background: var(--fundo); color: var(--tinta); }
+
+/* ---------- capa */
+.capa { position: relative; padding: 90px 0 70px; }
+.manchas { position: absolute; inset: -80px 0 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.manchas i { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .55; }
+.manchas i:nth-child(1) { width: 460px; height: 460px; background: var(--r4); top: -60px; left: -120px; }
+.manchas i:nth-child(2) { width: 420px; height: 420px; background: var(--p4); top: 40px; right: -100px; }
+.manchas i:nth-child(3) { width: 300px; height: 300px; background: #ffc9a8; top: 320px; left: 38%; }
+.selo {
+  display: inline-flex; align-items: center; gap: 8px; background: var(--branco); border: 1px solid var(--linha);
+  padding: 6px 14px 6px 8px; border-radius: 999px; font-size: .88rem; font-weight: 600; box-shadow: var(--sombra);
+}
+.selo b { background: var(--tinta); color: #fff; border-radius: 999px; padding: 2px 10px; font-size: .78rem; }
+.capa h1 { font-size: clamp(2.6rem, 7vw, 5.6rem); margin: 22px 0 18px; max-width: 14ch; }
+.capa h1 em {
+  font-style: normal;
+  background: linear-gradient(95deg, var(--r1) 0%, var(--r3) 40%, var(--p3) 75%, var(--p1) 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.capa p.intro { font-size: clamp(1.05rem, 2vw, 1.3rem); color: var(--tinta-2); max-width: 60ch; margin: 0 0 30px; }
+.botoes { display: flex; flex-wrap: wrap; gap: 12px; }
+.botao {
+  display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 999px;
+  font-weight: 700; text-decoration: none; transition: transform .15s ease, box-shadow .15s ease;
+}
+.botao:hover { transform: translateY(-2px); }
+.botao.r { background: var(--r1); color: #fff; box-shadow: 0 8px 24px rgba(218,41,28,.3); }
+.botao.p { background: var(--p1); color: #fff; box-shadow: 0 8px 24px rgba(179,18,79,.3); }
+.botao.c { background: var(--branco); border: 1px solid var(--linha); }
+
+.placar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 56px; }
+.placar div { background: var(--branco); border: 1px solid var(--linha); border-radius: var(--raio); padding: 20px 22px; box-shadow: var(--sombra); }
+.placar .num { font-size: clamp(1.9rem, 4vw, 2.7rem); font-weight: 700; display: block; }
+.placar span:last-child { font-size: .9rem; color: var(--tinta-2); }
+.placar div:nth-child(1) .num { color: var(--r1); }
+.placar div:nth-child(2) .num { color: var(--r3); }
+.placar div:nth-child(3) .num { color: var(--p3); }
+.placar div:nth-child(4) .num { color: var(--p1); }
+
+/* ---------- seções */
+section { padding: 70px 0; }
+.rotulo { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: var(--tinta-3); }
+h2 { font-size: clamp(2rem, 4.4vw, 3.2rem); margin: 10px 0 14px; }
+.sub { color: var(--tinta-2); max-width: 64ch; margin: 0 0 36px; font-size: 1.08rem; }
+
+/* ---------- matriz de competências */
+.matriz { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 16px; }
+.comp { background: var(--branco); border: 1px solid var(--linha); border-radius: var(--raio); padding: 22px; box-shadow: var(--sombra); position: relative; overflow: hidden; }
+.comp::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--c); }
+@media (min-width: 1100px) {
+  .comp:last-child { grid-column: 1 / -1; }
+  .comp:last-child ul { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+}
+.comp .ic { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; font-size: 1.35rem; background: color-mix(in srgb, var(--c) 14%, white); }
+.comp h3 { font-size: 1.22rem; margin: 14px 0 12px; }
+.comp ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.comp li { font-size: .93rem; color: var(--tinta-2); padding-left: 30px; position: relative; }
+.comp li::before { position: absolute; left: 0; top: 1px; font-size: .72rem; font-weight: 700; border-radius: 6px; padding: 1px 6px; color: #fff; }
+.comp li.r::before { content: "R"; background: var(--r1); }
+.comp li.m::before { content: "C"; background: var(--p1); }
+.legenda { display: flex; flex-wrap: wrap; gap: 18px; margin: -18px 0 26px; font-size: .9rem; color: var(--tinta-2); }
+.legenda b { display: inline-block; color: #fff; border-radius: 6px; padding: 0 7px; margin-right: 6px; font-size: .78rem; }
+
+/* ---------- projetos */
+.projeto { border-radius: 34px; padding: clamp(24px, 5vw, 56px); position: relative; overflow: hidden; }
+.projeto.reviews { background: linear-gradient(160deg, #fff6ec 0%, #ffe9dc 100%); border: 1px solid #f7d6c2; }
+.projeto.compras { background: linear-gradient(160deg, #fff5f9 0%, #fbe3ee 100%); border: 1px solid #f3cadb; }
+.projeto .faixa {
+  border-radius: 24px; padding: clamp(24px, 4vw, 40px); color: #fff; margin-bottom: 34px; position: relative; overflow: hidden;
+}
+.reviews .faixa { background: linear-gradient(120deg, #4a0707 0%, var(--r2) 40%, var(--r1) 100%); }
+.compras .faixa { background: linear-gradient(120deg, var(--p2) 0%, var(--p1) 45%, var(--p3) 100%); }
+.faixa::after { content: ""; position: absolute; width: 340px; height: 340px; border-radius: 50%; right: -90px; top: -120px; background: rgba(255,255,255,.12); }
+.faixa .numero { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: .9rem; letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
+.faixa h2 { color: #fff; margin: 8px 0 10px; max-width: 18ch; }
+.reviews .faixa h2 em { font-style: normal; color: var(--r4); }
+.compras .faixa h2 em { font-style: normal; color: #ffd6e6; }
+.faixa p { margin: 0 0 22px; max-width: 62ch; color: rgba(255,255,255,.9); font-size: 1.06rem; }
+.faixa .botoes .botao { background: #fff; color: var(--tinta); box-shadow: none; }
+.faixa .botoes .botao.contorno { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.55); }
+
+.grade-2 { display: grid; grid-template-columns: 1.05fr 1fr; gap: 28px; align-items: start; }
+.bloco { background: var(--branco); border-radius: var(--raio); padding: 24px 26px; box-shadow: var(--sombra); }
+.bloco h3 { font-size: 1.3rem; margin: 0 0 12px; }
+.bloco p { margin: 0 0 10px; color: var(--tinta-2); }
+.bloco ul { margin: 0; padding-left: 20px; color: var(--tinta-2); }
+.bloco li { margin-bottom: 6px; }
+.bloco + .bloco { margin-top: 18px; }
+
+/* vídeo */
+.video {
+  aspect-ratio: 16 / 9; border-radius: var(--raio); display: grid; place-items: center; text-align: center;
+  border: 3px dashed var(--c); background: repeating-linear-gradient(45deg, rgba(255,255,255,.75) 0 14px, rgba(255,255,255,.45) 14px 28px);
+  color: var(--tinta-2); padding: 20px; overflow: hidden;
+}
+.video .play { width: 74px; height: 74px; border-radius: 50%; background: var(--c); display: grid; place-items: center; margin: 0 auto 12px; box-shadow: 0 10px 26px color-mix(in srgb, var(--c) 40%, transparent); }
+.video .play::after { content: ""; border-left: 22px solid #fff; border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 6px; }
+.video strong { display: block; color: var(--tinta); font-size: 1.05rem; }
+.video iframe, .video video { width: 100%; height: 100%; border: 0; border-radius: calc(var(--raio) - 4px); }
+.video.preenchido { border: 0; background: #000; padding: 0; }
+
+/* fluxo */
+.fluxo { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; margin: 30px 0; }
+.passo { flex: 1 1 150px; background: var(--branco); border-radius: 18px; padding: 16px; box-shadow: var(--sombra); border-top: 5px solid var(--c); }
+.passo .quem { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--c); }
+.passo b { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; margin: 4px 0 4px; }
+.passo span { font-size: .86rem; color: var(--tinta-2); display: block; line-height: 1.45; }
+.seta { align-self: center; font-weight: 700; font-size: 1.4rem; color: var(--c); }
+
+/* números do projeto */
+.numeros { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 8px 0 30px; }
+.numeros div { background: var(--branco); border-radius: 18px; padding: 18px 20px; box-shadow: var(--sombra); }
+.numeros .num { font-size: clamp(1.7rem, 3.4vw, 2.4rem); font-weight: 700; display: block; color: var(--c); }
+.numeros span:last-child { font-size: .88rem; color: var(--tinta-2); display: block; line-height: 1.4; margin-top: 4px; }
+
+/* decisões */
+.decisoes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.decisao { background: var(--branco); border-radius: 18px; padding: 20px; box-shadow: var(--sombra); }
+.decisao .emoji { font-size: 1.5rem; }
+.decisao h3 { font-size: 1.08rem; margin: 8px 0 6px; }
+.decisao p { margin: 0; font-size: .92rem; color: var(--tinta-2); }
+
+/* aprendizados */
+.erros { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.erro { background: var(--branco); border: 1px solid var(--linha); border-radius: var(--raio); padding: 22px 24px; box-shadow: var(--sombra); display: grid; grid-template-columns: auto 1fr; gap: 16px; }
+.erro .tag { writing-mode: vertical-rl; transform: rotate(180deg); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--c); border-radius: 10px; padding: 10px 5px; text-align: center; }
+.erro h3 { font-size: 1.1rem; margin: 0 0 6px; }
+.erro p { margin: 0; color: var(--tinta-2); font-size: .94rem; }
+.erro p b { color: var(--tinta); }
+
+/* princípios */
+.principios { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.principio { border-radius: var(--raio); padding: 24px; color: #fff; min-height: 190px; display: flex; flex-direction: column; justify-content: space-between; }
+.principio:nth-child(1) { background: linear-gradient(150deg, var(--r1), var(--r3)); }
+.principio:nth-child(2) { background: linear-gradient(150deg, var(--r3), #f2b705); color: #2a1c00; }
+.principio:nth-child(3) { background: linear-gradient(150deg, var(--p3), var(--p1)); }
+.principio:nth-child(4) { background: linear-gradient(150deg, var(--p1), #4a0b2a); }
+.principio .num { font-size: 2.6rem; font-weight: 700; opacity: .4; }
+.principio h3 { font-size: 1.2rem; margin: 0 0 6px; }
+.principio p { margin: 0; font-size: .92rem; opacity: .92; }
+
+/* stack */
+.stack { display: flex; flex-wrap: wrap; gap: 10px; }
+.stack span { background: var(--branco); border: 1px solid var(--linha); border-radius: 999px; padding: 8px 16px; font-weight: 600; font-size: .92rem; box-shadow: var(--sombra); }
+.stack span::before { content: "●"; margin-right: 8px; color: var(--c, var(--r1)); }
+
+/* contato */
+footer { padding: 30px 0 60px; }
+.contato {
+  border-radius: 34px; padding: clamp(28px, 6vw, 64px); color: #fff; text-align: center;
+  background: linear-gradient(120deg, var(--r2) 0%, var(--r1) 30%, var(--r3) 55%, var(--p3) 80%, var(--p1) 100%);
+}
+.contato h2 { color: #fff; margin: 0 auto 12px; max-width: 18ch; }
+.contato p { margin: 0 auto 26px; max-width: 54ch; opacity: .92; }
+.contato .botoes { justify-content: center; }
+.contato .botao { background: #fff; color: var(--tinta); }
+.rodape { text-align: center; color: var(--tinta-3); font-size: .85rem; margin-top: 22px; }
+
+/* animação de entrada */
+.surge { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.surge.visivel { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .surge { opacity: 1; transform: none; transition: none; }
+  .botao { transition: none; }
+}
+
+/* ---------- telas menores */
+@media (max-width: 960px) {
+  .grade-2 { grid-template-columns: 1fr; }
+  .decisoes { grid-template-columns: 1fr; }
+  .principios { grid-template-columns: repeat(2, 1fr); }
+  .placar, .numeros { grid-template-columns: repeat(2, 1fr); }
+  .erros { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  nav ul { display: none; }
+  .capa { padding: 56px 0 40px; }
+  section { padding: 48px 0; }
+  .seta { display: none; }
+  .principios { grid-template-columns: 1fr; }
+  .matriz { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="marca" href="#topo">Yasmin <span>Santos</span></a>
+  <ul>
+    <li><a class="item" href="#competencias">Competências</a></li>
+    <li><a class="item" href="#reviews">Central de reviews</a></li>
+    <li><a class="item" href="#compras">Assistente de compras</a></li>
+    <li><a class="item" href="#aprendizados">Aprendizados</a></li>
+    <li><a class="item" href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- ======================================================= CAPA -->
+<header class="capa envelope" id="topo">
+  <div class="manchas" aria-hidden="true"><i></i><i></i><i></i></div>
+  <span class="selo"><b>AI Builder</b> IA aplicada a negócios</span>
+  <h1>Transformo IA em <em>solução que funciona.</em></h1>
+  <p class="intro">
+    Dois projetos completos, do dado bruto ao produto publicado: agentes que decidem com segurança,
+    prompts avaliados com métrica, automação, integração com APIs e análise de dados.
+    Sempre com o custo sob controle e uma pessoa no circuito onde o risco é alto.
+  </p>
+  <div class="botoes">
+    <a class="botao r" href="#reviews">🛰️ Central de reviews com IA</a>
+    <a class="botao p" href="#compras">🛒 Assistente de compras com IA</a>
+  </div>
+
+  <div class="placar">
+    <div class="surge"><span class="num">2</span><span>projetos publicados e abertos para testar</span></div>
+    <div class="surge"><span class="num">90%</span><span>das reviews resolvidas sem humano</span></div>
+    <div class="surge"><span class="num">≈ 23 h</span><span>de trabalho manual economizadas em 25 h</span></div>
+    <div class="surge"><span class="num">US$ 0</span><span>para abrir as demos: nada chama IA sem necessidade</span></div>
+  </div>
+</header>
+
+<main>
+
+<!-- ======================================================= COMPETÊNCIAS -->
+<section id="competencias">
+  <div class="envelope">
+    <span class="rotulo">O que a vaga pede</span>
+    <h2>Cada requisito, com prova no código</h2>
+    <p class="sub">Nada aqui é promessa: cada item aponta para algo que roda nos projetos publicados.</p>
+    <div class="legenda">
+      <span><b style="background:var(--r1)">R</b>Central de reviews</span>
+      <span><b style="background:var(--p1)">C</b>Assistente de compras</span>
+    </div>
+
+    <div class="matriz">
+      <article class="comp surge" style="--c: var(--r1)">
+        <div class="ic">🧠</div>
+        <h3>Prompt engineering avançado</h3>
+        <ul>
+          <li class="r">4 versões do prompt de classificação, medidas contra um gabarito de 50 reviews rotuladas: acurácia de tema de 60% para 80%.</li>
+          <li class="r">Saída em JSON validada (Pydantic) com nova tentativa automática: só 0,7% veio inválida.</li>
+          <li class="m">Regras nascidas de erros reais: a análise de hábitos passou a priorizar o maior gasto e citar números do histórico.</li>
+        </ul>
+      </article>
+
+      <article class="comp surge" style="--c: var(--r3)">
+        <div class="ic">🤖</div>
+        <h3>Orquestração de agentes</h3>
+        <ul>
+          <li class="r">Classificador, decisor, redator e revisor, cada um com prompt versionado e papel claro.</li>
+          <li class="r">Travas em código: caso grave sempre vai para o gerente, mesmo que a IA discorde.</li>
+          <li class="m">A IA sugere e o código confere: sugestão que cita algo inexistente ou promete economia impossível é descartada.</li>
+        </ul>
+      </article>
+
+      <article class="comp surge" style="--c: #e0a100">
+        <div class="ic">⚡</div>
+        <h3>Automação</h3>
+        <ul>
+          <li class="r">Arquivo novo na pasta de entrada é processado sozinho; caso grave dispara alerta por webhook (Slack, Teams ou Discord).</li>
+          <li class="m">Uma foto da nota fiscal vira histórico de compras sem digitar nada.</li>
+          <li class="m">Lista de compras montada sozinha a partir do consumo de cada pessoa.</li>
+        </ul>
+      </article>
+
+      <article class="comp surge" style="--c: var(--p3)">
+        <div class="ic">🔌</div>
+        <h3>APIs e integrações</h3>
+        <ul>
+          <li class="r">Uma camada única para todos os modelos (litellm): trocar entre modelo local e API é mudar uma linha de configuração.</li>
+          <li class="m">Nota oficial da Sefaz lida pelo QR code, sem captcha; modelo de visão como plano B.</li>
+          <li class="r">Cache em disco, novas tentativas e registro de tokens, custo e tempo de cada chamada.</li>
+        </ul>
+      </article>
+
+      <article class="comp surge" style="--c: var(--p1)">
+        <div class="ic">📊</div>
+        <h3>Análise de dados com IA</h3>
+        <ul>
+          <li class="r">Dashboard com mapa das lojas, ranking, fila de escalados e qualidade da IA.</li>
+          <li class="r">Comparação entre modelos com teste estatístico (McNemar) e mapa de concordância.</li>
+          <li class="m">Recorrência de compra, despensa e um histórico de 2 anos com 200 compras.</li>
+        </ul>
+      </article>
+
+      <article class="comp surge" style="--c: var(--roxo)">
+        <div class="ic">💼</div>
+        <h3>Visão de negócio</h3>
+        <ul>
+          <li class="r">Impacto em horas economizadas, com a premissa visível e ajustável na tela.</li>
+          <li class="r">Custo por 1.000 reviews na API (~US$ 0,51) contra modelo local gratuito, mas 13× mais lento.</li>
+          <li class="m">Análise por meta (economizar, comer melhor, ganhar massa, emagrecer) com economia estimada em reais.</li>
+        </ul>
+      </article>
+
+      <article class="comp surge" style="--c: var(--verde)">
+        <div class="ic">🛡️</div>
+        <h3>IA responsável</h3>
+        <ul>
+          <li class="r">Humano no circuito onde o erro é caro: saúde, segurança, discriminação e ameaça.</li>
+          <li class="m">Privacidade por padrão: CPF nunca é lido, a loja vira apelido e remédio vira "item de farmácia".</li>
+          <li class="m">Nenhum processamento em lote sem estimativa de custo e confirmação antes.</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= PROJETO 1 -->
+<section id="reviews">
+  <div class="envelope">
+    <div class="projeto reviews">
+      <div class="faixa">
+        <div class="numero">Projeto 01 · Operações</div>
+        <h2>Central de operações de reviews <em>com IA</em></h2>
+        <p>
+          Agentes de IA leem as avaliações de uma rede de restaurantes, entendem o problema, decidem o que fazer
+          e escrevem a resposta ao cliente. Os casos graves sempre chegam a uma pessoa.
+        </p>
+        <div class="botoes">
+          <a class="botao" href="https://central-reviews-ai.streamlit.app/" target="_blank" rel="noopener">▶ Abrir a demo</a>
+          <a class="botao contorno" href="https://github.com/yasmin-rs/Portifolio" target="_blank" rel="noopener">Ver o código</a>
+        </div>
+      </div>
+
+      <div class="grade-2">
+        <div>
+          <div class="bloco surge">
+            <h3>😩 O problema</h3>
+            <ul>
+              <li>Uma rede com dezenas de lojas recebe centenas de avaliações, e <b>ninguém lê tudo</b>.</li>
+              <li>Os <b>casos graves se perdem no meio</b>: inseto na comida, cliente que passou mal, discriminação.</li>
+              <li>Responder uma por uma é lento e as respostas saem inconsistentes.</li>
+              <li>O gerente não sabe <b>qual problema</b> atacar primeiro nem <b>em qual loja</b>.</li>
+            </ul>
+          </div>
+          <div class="bloco surge">
+            <h3>💡 A solução</h3>
+            <p>Um pipeline que faz a triagem sozinho e só chama uma pessoa quando precisa, com um dashboard
+              que mostra onde está cada problema e como a IA chegou em cada decisão.</p>
+          </div>
+        </div>
+
+        <!-- =========================================================
+             VÍDEO DA CENTRAL DE REVIEWS
+             Para colocar o vídeo, troque o bloco <div class="video">...</div> abaixo por UMA das opções:
+
+             YouTube (use o link "embed"):
+             <div class="video preenchido" style="--c: var(--r1)">
+               <iframe src="https://www.youtube.com/embed/ID_DO_VIDEO" title="Demonstração da Central de reviews"
+                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+             </div>
+
+             Arquivo de vídeo no próprio repositório (ex.: videos/central.mp4):
+             <div class="video preenchido" style="--c: var(--r1)">
+               <video src="videos/central.mp4" controls preload="metadata"></video>
+             </div>
+        ========================================================== -->
+        <div class="video surge" style="--c: var(--r1)">
+          <div>
+            <div class="play"></div>
+            <strong>Vídeo de demonstração</strong>
+            <span>em breve: 2 minutos mostrando a central funcionando</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fluxo">
+        <div class="passo surge" style="--c:#c2410c"><div class="quem">🤖 IA</div><b>1. Classificador</b><span>Define tema, sentimento e gravidade.</span></div>
+        <div class="seta" style="--c:var(--r1)">→</div>
+        <div class="passo surge" style="--c:var(--r1)"><div class="quem">⚙️ Código</div><b>2. Regra de segurança</b><span>Saúde, segurança ou ameaça? Vira grave, diga a IA o que disser.</span></div>
+        <div class="seta" style="--c:var(--r1)">→</div>
+        <div class="passo surge" style="--c:var(--r2)"><div class="quem">🤖 IA + ⚙️ código</div><b>3. Decisor</b><span>Ignorar, responder ou escalar. Grave sempre escala.</span></div>
+        <div class="seta" style="--c:var(--r1)">→</div>
+        <div class="passo surge" style="--c:#b45309"><div class="quem">🤖 IA</div><b>4. Redator</b><span>Escreve a resposta, sem prometer reembolso nem cupom.</span></div>
+        <div class="seta" style="--c:var(--r1)">→</div>
+        <div class="passo surge" style="--c:#6b3a32"><div class="quem">🤖 IA + ⚙️ código</div><b>5. Revisor</b><span>Confere tom e promessas. Reprovou duas vezes, vai para uma pessoa.</span></div>
+      </div>
+
+      <div class="numeros" style="--c: var(--r1)">
+        <div class="surge"><span class="num">30 de 30</span><span>casos graves encaminhados ao gerente</span></div>
+        <div class="surge" style="--c: var(--r3)"><span class="num">90%</span><span>resolvidas sem humano em 500 reviews</span></div>
+        <div class="surge" style="--c: var(--r2)"><span class="num">96%</span><span>de acerto no tema com o melhor modelo e prompt</span></div>
+        <div class="surge" style="--c: #b45309"><span class="num">~2 dias</span><span>do zero ao dashboard publicado</span></div>
+      </div>
+
+      <div class="decisoes">
+        <div class="decisao surge"><div class="emoji">🔒</div><h3>A IA não decide o que é grave sozinha</h3>
+          <p>Uma regra em código pegou 6 casos graves que o modelo tinha classificado como leves.</p></div>
+        <div class="decisao surge"><div class="emoji">⚖️</div><h3>Discordância vira fila de revisão</h3>
+          <p>Onde o modelo local e a API discordam, uma pessoa olha. Marcar grave de menos é o erro mais caro.</p></div>
+        <div class="decisao surge"><div class="emoji">💸</div><h3>Custo escolhido, não descoberto</h3>
+          <p>Local e gratuito para desenvolver; API 13× mais rápida por ~US$ 0,51 a cada 1.000 reviews.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= PROJETO 2 -->
+<section id="compras">
+  <div class="envelope">
+    <div class="projeto compras">
+      <div class="faixa">
+        <div class="numero">Projeto 02 · Consumidor</div>
+        <h2>Assistente de compras <em>com IA</em></h2>
+        <p>
+          Uma foto da nota do mercado vira histórico de gastos, aviso do que está acabando,
+          lista de compras pronta e uma análise dos hábitos de acordo com a meta da pessoa.
+        </p>
+        <div class="botoes">
+          <a class="botao" href="https://assistente-compras-ai.streamlit.app/" target="_blank" rel="noopener">▶ Abrir a demo</a>
+          <a class="botao contorno" href="https://github.com/yasmin-rs/mercado" target="_blank" rel="noopener">Ver o código</a>
+        </div>
+      </div>
+
+      <div class="grade-2">
+        <div>
+          <div class="bloco surge">
+            <h3>😩 O problema</h3>
+            <ul>
+              <li>Quase ninguém sabe <b>quanto gasta no mercado</b>, com o quê, nem de quanto em quanto tempo compra cada coisa.</li>
+              <li>A informação existe na nota fiscal, mas presa em papel que apaga e nomes como <b>OVO BCO EXT YAN</b>.</li>
+              <li>Um número errado no histórico estraga todas as análises de depois.</li>
+            </ul>
+          </div>
+          <div class="bloco surge">
+            <h3>💡 A solução</h3>
+            <p>Lê a nota pelo QR code (dados oficiais da Sefaz) ou pela foto, confere a matemática em código,
+              padroniza os nomes com IA e transforma tudo em respostas do dia a dia, como
+              <b>"preciso comprar leite?"</b></p>
+          </div>
+        </div>
+
+        <!-- =========================================================
+             VÍDEO DO ASSISTENTE DE COMPRAS
+             Mesmo jeito do vídeo da Central: troque o bloco abaixo por um iframe do YouTube
+             (https://www.youtube.com/embed/ID_DO_VIDEO) ou por <video src="videos/compras.mp4" controls></video>,
+             dentro de <div class="video preenchido" style="--c: var(--p1)"> ... </div>
+        ========================================================== -->
+        <div class="video surge" style="--c: var(--p1)">
+          <div>
+            <div class="play"></div>
+            <strong>Vídeo de demonstração</strong>
+            <span>em breve: da foto da nota até a análise com IA</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fluxo">
+        <div class="passo surge" style="--c:var(--p2)"><div class="quem">📷 Entrada</div><b>1. Foto da nota</b><span>Câmera do celular ou upload.</span></div>
+        <div class="seta" style="--c:var(--p1)">→</div>
+        <div class="passo surge" style="--c:var(--p1)"><div class="quem">⚙️ Código + 🤖 IA</div><b>2. Leitura</b><span>QR da Sefaz primeiro; se não der, modelo de visão.</span></div>
+        <div class="seta" style="--c:var(--p1)">→</div>
+        <div class="passo surge" style="--c:#c2185b"><div class="quem">⚙️ Código</div><b>3. Conferência</b><span>Quantidade × preço e soma da nota precisam fechar.</span></div>
+        <div class="seta" style="--c:var(--p1)">→</div>
+        <div class="passo surge" style="--c:var(--p3)"><div class="quem">🤖 IA</div><b>4. Padronização</b><span>"LTE COND SEMIDESN" vira leite condensado.</span></div>
+        <div class="seta" style="--c:var(--p1)">→</div>
+        <div class="passo surge" style="--c:#9c27b0"><div class="quem">⚙️ + 🤖</div><b>5. Despensa e análise</b><span>Lista de compras, "preciso comprar?" e dicas pela meta.</span></div>
+      </div>
+
+      <div class="numeros" style="--c: var(--p1)">
+        <div class="surge"><span class="num">78%</span><span>das fotos de notas lidas com a conta fechando (40 de 51)</span></div>
+        <div class="surge" style="--c: var(--p3)"><span class="num">64→90%</span><span>de nomes certos ao trocar o modelo de padronização</span></div>
+        <div class="surge" style="--c: var(--p2)"><span class="num">200</span><span>compras em 2 anos no perfil de demonstração</span></div>
+        <div class="surge" style="--c: #9c27b0"><span class="num">R$ 42</span><span>por mês de economia sugerida, conferida em código</span></div>
+      </div>
+
+      <div class="decisoes">
+        <div class="decisao surge"><div class="emoji">🧾</div><h3>Nota que não fecha não entra calada</h3>
+          <p>As 11 fotos com erro de leitura foram pegas pela conferência, em vez de sujar o histórico.</p></div>
+        <div class="decisao surge"><div class="emoji">🔐</div><h3>Privacidade desde o desenho</h3>
+          <p>CPF nunca é lido, o mercado vira apelido e item de farmácia não é enviado com nome à IA.</p></div>
+        <div class="decisao surge"><div class="emoji">🗣️</div><h3>Resposta explicável</h3>
+          <p>"Você comprou 1 leite em 14/11 e costuma durar ~9 dias." O "acabou" ou "ainda tenho" ajusta a próxima previsão.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= APRENDIZADOS -->
+<section id="aprendizados">
+  <div class="envelope">
+    <span class="rotulo">O que deu errado</span>
+    <h2>E o que mudou por causa disso</h2>
+    <p class="sub">Construir com IA é medir, errar rápido e corrigir com evidência. Alguns exemplos reais dos dois projetos:</p>
+
+    <div class="erros">
+      <div class="erro surge" style="--c: var(--r1)"><div class="tag">Reviews</div><div>
+        <h3>O modelo esquecia de assinar a resposta</h3>
+        <p>Em 43 de 45 respostas. <b>Mudança:</b> a assinatura passou a ser colocada pelo código. Nem tudo precisa ser prompt.</p></div></div>
+      <div class="erro surge" style="--c: var(--r1)"><div class="tag">Reviews</div><div>
+        <h3>A IA classificava casos graves como leves</h3>
+        <p><b>Mudança:</b> uma regra determinística força a escalada em saúde, segurança e ameaça. Ela pegou 6 casos.</p></div></div>
+      <div class="erro surge" style="--c: var(--p1)"><div class="tag">Compras</div><div>
+        <h3>"Batata: costuma durar 171 dias"</h3>
+        <p>A recorrência misturava dados de outras pessoas e tirava padrão de 2 compras. <b>Mudança:</b> só dados da própria pessoa, 3 compras no mínimo e limites por tipo de alimento.</p></div></div>
+      <div class="erro surge" style="--c: var(--p1)"><div class="tag">Compras</div><div>
+        <h3>A primeira análise ignorou o maior gasto</h3>
+        <p>Elogiou hortifrúti (4,6%) e esqueceu higiene (30%). <b>Mudança:</b> o prompt exige prioridade pelo que mais pesa e números em cada afirmação.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= PRINCÍPIOS -->
+<section>
+  <div class="envelope">
+    <span class="rotulo">Como eu trabalho</span>
+    <h2>Quatro princípios que se repetem</h2>
+    <div class="principios" style="margin-top: 30px">
+      <div class="principio surge"><span class="num">01</span><div><h3>Medir antes de confiar</h3><p>Gabarito, métrica e comparação entre versões antes de colocar qualquer prompt em uso.</p></div></div>
+      <div class="principio surge"><span class="num">02</span><div><h3>O código confere a IA</h3><p>Matemática, regras de risco e promessas proibidas ficam em código, não na boa vontade do modelo.</p></div></div>
+      <div class="principio surge"><span class="num">03</span><div><h3>Custo sob controle</h3><p>Cache, modelo local para desenvolver e estimativa de custo antes de qualquer lote.</p></div></div>
+      <div class="principio surge"><span class="num">04</span><div><h3>Mostrar o limite</h3><p>Avisos de amostra pequena, dados sintéticos identificados e uma seção honesta do que deu errado.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================= STACK -->
+<section style="padding-top: 20px">
+  <div class="envelope">
+    <span class="rotulo">Ferramentas</span>
+    <h2>Stack usada</h2>
+    <div class="stack" style="margin-top: 24px">
+      <span style="--c: var(--r1)">Python</span>
+      <span style="--c: var(--r3)">pandas</span>
+      <span style="--c: #e0a100">Pydantic</span>
+      <span style="--c: var(--p3)">litellm</span>
+      <span style="--c: var(--p1)">Gemini (API)</span>
+      <span style="--c: var(--roxo)">Ollama · Qwen local</span>
+      <span style="--c: var(--r1)">Streamlit</span>
+      <span style="--c: var(--r3)">Altair</span>
+      <span style="--c: #e0a100">pydeck</span>
+      <span style="--c: var(--p3)">OpenCV · leitura de QR</span>
+      <span style="--c: var(--p1)">pytest</span>
+      <span style="--c: var(--verde)">uv</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ======================================================= CONTATO -->
+<footer id="contato">
+  <div class="envelope">
+    <div class="contato">
+      <h2>Vamos conversar sobre IA que resolve problema de verdade?</h2>
+      <p>Os dois projetos estão no ar e o código está aberto. Teste, explore e me chame para conversar.</p>
+      <div class="botoes">
+        <!-- TROQUE pelos seus links -->
+        <a class="botao" href="https://www.linkedin.com/in/SEU_PERFIL" target="_blank" rel="noopener">💼 LinkedIn</a>
+        <a class="botao" href="https://github.com/yasmin-rs" target="_blank" rel="noopener">🐙 GitHub</a>
+        <a class="botao" href="mailto:SEU_EMAIL">✉️ E-mail</a>
+      </div>
+    </div>
+    <p class="rodape">Projetos de portfólio com dados públicos, sem vínculo com as marcas citadas nos datasets.</p>
+  </div>
+</footer>
+
+<script>
+  // animação de entrada: cada bloco aparece ao entrar na tela
+  (function () {
+    var itens = document.querySelectorAll('.surge');
+    if (!('IntersectionObserver' in window)) {
+      itens.forEach(function (el) { el.classList.add('visivel'); });
+      return;
+    }
+    var obs = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visivel'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    itens.forEach(function (el) { obs.observe(el); });
+  })();
+</script>
+</body>
+</html>
