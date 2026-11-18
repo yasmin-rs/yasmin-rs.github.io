@@ -4,624 +4,744 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yasmin Santos · AI Builder</title>
-<meta name="description" content="Portfólio de IA aplicada a negócios: agentes, prompts avaliados, automação e análise de dados, em dois projetos publicados.">
+<meta name="description" content="Yasmin Santos, AI Builder. Dois projetos de IA aplicada a negócios: agentes, prompts avaliados, automação, APIs e análise de dados.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --fundo: #fffaf3;
-  --tinta: #1d1418;
-  --tinta-2: #4f4549;
-  --tinta-3: #7a6f73;
-  --linha: #efe4dc;
-  --branco: #ffffff;
-
-  /* Central de reviews: vermelho, laranja e amarelo */
-  --r1: #da291c; --r2: #8f1810; --r3: #f08a1c; --r4: #ffbc0d; --r-claro: #fff1e6;
-  /* Assistente de compras: rosa */
-  --p1: #b3124f; --p2: #7d0a37; --p3: #e0457f; --p4: #f6b3cb; --p-claro: #fdf0f5;
-  /* destaques gerais */
-  --roxo: #5b2be0; --verde: #12a36a;
-
-  --raio: 22px;
-  --sombra: 0 1px 2px rgba(29,20,24,.05), 0 12px 32px rgba(29,20,24,.07);
+  --ameixa: #2b0f22;
+  --ameixa-2: #3a1430;
+  --ameixa-3: #55224a;
+  --rosa: #f58bb0;
+  --rosa-forte: #ef4f8b;
+  --rosa-claro: #ffd3e3;
+  --manteiga: #ffe98a;
+  --manteiga-claro: #fff4c2;
+  --creme: #fff7ec;
+  --tomate: #ff5a36;
+  --azul: #3b5bfd;
+  --tinta: #1c0f17;
+  --tinta-2: #5a4a53;
+  --linha-clara: rgba(255,255,255,.16);
+  --linha-escura: rgba(28,15,23,.14);
+  --serif: 'Instrument Serif', Georgia, serif;
+  --titulo: 'Space Grotesk', 'Inter', sans-serif;
+  --mao: 'Caveat', cursive;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {
-  margin: 0; background: var(--fundo); color: var(--tinta);
+  margin: 0; background: var(--creme); color: var(--tinta);
   font-family: 'Inter', system-ui, sans-serif; font-size: 17px; line-height: 1.6;
   -webkit-font-smoothing: antialiased; overflow-x: hidden;
 }
-h1, h2, h3, .num, .marca { font-family: 'Space Grotesk', 'Inter', sans-serif; letter-spacing: -0.02em; line-height: 1.1; }
 a { color: inherit; }
-img, video, iframe { max-width: 100%; }
-.envelope { width: min(1180px, 100% - 32px); margin-inline: auto; }
-
-/* ---------- navegação */
-nav {
-  position: sticky; top: 12px; z-index: 50; margin: 12px auto 0; width: min(1180px, 100% - 32px);
-  display: flex; align-items: center; justify-content: space-between; gap: 12px;
-  background: rgba(255,255,255,.82); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--linha); border-radius: 999px; padding: 8px 8px 8px 20px; box-shadow: var(--sombra);
+img { display: block; max-width: 100%; }
+.envelope { width: min(1200px, 100% - 32px); margin-inline: auto; }
+.faixa { position: relative; overflow: hidden; }
+.escura { background: var(--ameixa); color: #fbeef3; }
+.etiqueta {
+  font-size: .76rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
 }
-.marca { font-weight: 700; font-size: 1.05rem; text-decoration: none; white-space: nowrap; }
-.marca span { background: linear-gradient(90deg, var(--r1), var(--p3)); -webkit-background-clip: text; background-clip: text; color: transparent; }
-nav ul { list-style: none; display: flex; gap: 4px; margin: 0; padding: 0; flex-wrap: wrap; justify-content: flex-end; }
-nav a.item { display: block; padding: 7px 14px; border-radius: 999px; text-decoration: none; font-size: .9rem; font-weight: 600; color: var(--tinta-2); }
-nav a.item:hover { background: var(--fundo); color: var(--tinta); }
+.etiqueta.rosa { color: var(--rosa); }
+.etiqueta.vinho { color: var(--rosa-forte); }
+.serif { font-family: var(--serif); font-weight: 400; letter-spacing: -0.01em; line-height: .98; }
+.serif em { font-style: italic; }
+.mao { font-family: var(--mao); font-size: 1.5rem; line-height: 1.1; }
 
-/* ---------- capa */
-.capa { position: relative; padding: 90px 0 70px; }
-.manchas { position: absolute; inset: -80px 0 0; z-index: -1; overflow: hidden; pointer-events: none; }
-.manchas i { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .55; }
-.manchas i:nth-child(1) { width: 460px; height: 460px; background: var(--r4); top: -60px; left: -120px; }
-.manchas i:nth-child(2) { width: 420px; height: 420px; background: var(--p4); top: 40px; right: -100px; }
-.manchas i:nth-child(3) { width: 300px; height: 300px; background: #ffc9a8; top: 320px; left: 38%; }
-.selo {
-  display: inline-flex; align-items: center; gap: 8px; background: var(--branco); border: 1px solid var(--linha);
-  padding: 6px 14px 6px 8px; border-radius: 999px; font-size: .88rem; font-weight: 600; box-shadow: var(--sombra);
+/* ---------------------------------------------------------------- topo */
+.topo { border-bottom: 1px solid var(--linha-clara); }
+.topo .envelope { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; }
+.logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+.logo .mono {
+  width: 44px; height: 44px; border-radius: 12px; background: var(--creme); color: var(--ameixa);
+  display: flex; align-items: center; justify-content: center; font-family: var(--titulo); font-weight: 700; font-size: .98rem; transform: rotate(-6deg); white-space: nowrap; letter-spacing: -0.03em;
 }
-.selo b { background: var(--tinta); color: #fff; border-radius: 999px; padding: 2px 10px; font-size: .78rem; }
-.capa h1 { font-size: clamp(2.6rem, 7vw, 5.6rem); margin: 22px 0 18px; max-width: 14ch; }
-.capa h1 em {
-  font-style: normal;
-  background: linear-gradient(95deg, var(--r1) 0%, var(--r3) 40%, var(--p3) 75%, var(--p1) 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+.logo .mono b { color: var(--rosa-forte); }
+.logo .nome { font-family: var(--titulo); font-weight: 700; line-height: 1.1; font-size: .98rem; }
+.logo .nome small { display: block; font-family: 'Inter'; font-weight: 500; font-size: .74rem; color: #d7bccb; }
+.topo nav { display: flex; gap: 26px; }
+.topo nav a { text-decoration: none; font-size: .9rem; font-weight: 600; color: #f1dce6; }
+.topo nav a:hover { color: var(--rosa); }
+.pilula {
+  display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 11px 20px;
+  font-weight: 700; font-size: .92rem; text-decoration: none; transition: transform .15s ease, background .15s ease;
+  white-space: nowrap;
 }
-.capa p.intro { font-size: clamp(1.05rem, 2vw, 1.3rem); color: var(--tinta-2); max-width: 60ch; margin: 0 0 30px; }
-.botoes { display: flex; flex-wrap: wrap; gap: 12px; }
-.botao {
-  display: inline-flex; align-items: center; gap: 8px; padding: 13px 22px; border-radius: 999px;
-  font-weight: 700; text-decoration: none; transition: transform .15s ease, box-shadow .15s ease;
+.pilula:hover { transform: translateY(-2px); }
+.pilula.contorno-claro { border: 1.5px solid rgba(255,255,255,.55); color: #fff; }
+.pilula.creme { background: var(--creme); color: var(--ameixa); }
+.pilula.ameixa { background: var(--ameixa); color: #fff; }
+.pilula.contorno-escuro { border: 1.5px solid var(--tinta); color: var(--tinta); }
+
+.subtopo { border-bottom: 1px solid var(--linha-clara); }
+.subtopo .envelope { display: flex; justify-content: space-between; padding: 12px 0; gap: 12px; }
+.subtopo span { font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #e6cdd9; }
+
+/* ---------------------------------------------------------------- capa */
+.capa .envelope { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center; padding: 70px 0 90px; }
+.capa h1 { font-size: clamp(3.4rem, 8.4vw, 7.4rem); margin: 0 0 28px; color: #fff3f7; }
+.capa h1 em { color: var(--rosa); }
+.capa h1 .sublinhado { position: relative; white-space: nowrap; }
+.capa h1 .sublinhado svg { position: absolute; left: 0; right: 0; bottom: -.08em; width: 100%; height: .22em; }
+.capa p.oi { font-size: 1.12rem; color: #ead5df; max-width: 50ch; margin: 0 0 30px; }
+.capa p.oi b { color: #fff; }
+.botoes { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+
+.retrato-area { position: relative; min-height: 470px; }
+.retrato {
+  position: absolute; inset: 10px 20px 20px 30px; border: 8px solid var(--rosa); border-radius: 26px 26px 120px 26px;
+  overflow: hidden; transform: rotate(3deg); background: var(--ameixa-3); box-shadow: 0 30px 60px rgba(0,0,0,.35);
 }
-.botao:hover { transform: translateY(-2px); }
-.botao.r { background: var(--r1); color: #fff; box-shadow: 0 8px 24px rgba(218,41,28,.3); }
-.botao.p { background: var(--p1); color: #fff; box-shadow: 0 8px 24px rgba(179,18,79,.3); }
-.botao.c { background: var(--branco); border: 1px solid var(--linha); }
-
-.placar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 56px; }
-.placar div { background: var(--branco); border: 1px solid var(--linha); border-radius: var(--raio); padding: 20px 22px; box-shadow: var(--sombra); }
-.placar .num { font-size: clamp(1.9rem, 4vw, 2.7rem); font-weight: 700; display: block; }
-.placar span:last-child { font-size: .9rem; color: var(--tinta-2); }
-.placar div:nth-child(1) .num { color: var(--r1); }
-.placar div:nth-child(2) .num { color: var(--r3); }
-.placar div:nth-child(3) .num { color: var(--p3); }
-.placar div:nth-child(4) .num { color: var(--p1); }
-
-/* ---------- seções */
-section { padding: 70px 0; }
-.rotulo { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: var(--tinta-3); }
-h2 { font-size: clamp(2rem, 4.4vw, 3.2rem); margin: 10px 0 14px; }
-.sub { color: var(--tinta-2); max-width: 64ch; margin: 0 0 36px; font-size: 1.08rem; }
-
-/* ---------- matriz de competências */
-.matriz { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 16px; }
-.comp { background: var(--branco); border: 1px solid var(--linha); border-radius: var(--raio); padding: 22px; box-shadow: var(--sombra); position: relative; overflow: hidden; }
-.comp::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 5px; background: var(--c); }
-@media (min-width: 1100px) {
-  .comp:last-child { grid-column: 1 / -1; }
-  .comp:last-child ul { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.retrato img.foto { width: 100%; height: 100%; object-fit: cover; }
+.retrato .colagem { display: none; position: absolute; inset: 0; background: linear-gradient(150deg, var(--ameixa-3), #7a2d5f); }
+.retrato.sem-foto img.foto { display: none; }
+.retrato.sem-foto .colagem { display: block; }
+.colagem img { position: absolute; width: 88%; border-radius: 12px; box-shadow: 0 16px 34px rgba(0,0,0,.4); border: 3px solid #fff; }
+.colagem img:nth-child(1) { top: 8%; left: -6%; transform: rotate(-5deg); }
+.colagem img:nth-child(2) { bottom: 10%; right: -8%; transform: rotate(4deg); }
+.retrato .legenda-foto {
+  position: absolute; left: 18px; bottom: 16px; background: rgba(28,15,23,.7); color: #fff; font-size: .68rem;
+  font-weight: 700; letter-spacing: .14em; text-transform: uppercase; padding: 6px 10px; border-radius: 8px;
 }
-.comp .ic { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; font-size: 1.35rem; background: color-mix(in srgb, var(--c) 14%, white); }
-.comp h3 { font-size: 1.22rem; margin: 14px 0 12px; }
-.comp ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.comp li { font-size: .93rem; color: var(--tinta-2); padding-left: 30px; position: relative; }
-.comp li::before { position: absolute; left: 0; top: 1px; font-size: .72rem; font-weight: 700; border-radius: 6px; padding: 1px 6px; color: #fff; }
-.comp li.r::before { content: "R"; background: var(--r1); }
-.comp li.m::before { content: "C"; background: var(--p1); }
-.legenda { display: flex; flex-wrap: wrap; gap: 18px; margin: -18px 0 26px; font-size: .9rem; color: var(--tinta-2); }
-.legenda b { display: inline-block; color: #fff; border-radius: 6px; padding: 0 7px; margin-right: 6px; font-size: .78rem; }
-
-/* ---------- projetos */
-.projeto { border-radius: 34px; padding: clamp(24px, 5vw, 56px); position: relative; overflow: hidden; }
-.projeto.reviews { background: linear-gradient(160deg, #fff6ec 0%, #ffe9dc 100%); border: 1px solid #f7d6c2; }
-.projeto.compras { background: linear-gradient(160deg, #fff5f9 0%, #fbe3ee 100%); border: 1px solid #f3cadb; }
-.projeto .faixa {
-  border-radius: 24px; padding: clamp(24px, 4vw, 40px); color: #fff; margin-bottom: 34px; position: relative; overflow: hidden;
+.selo-girando { position: absolute; top: -22px; left: -18px; width: 132px; height: 132px; z-index: 3; }
+.selo-girando .roda { width: 100%; height: 100%; animation: girar 18s linear infinite; }
+.selo-girando .miolo {
+  position: absolute; inset: 34px; border-radius: 50%; background: var(--manteiga); display: grid; place-items: center;
+  font-size: 1.7rem; transform: rotate(-8deg);
 }
-.reviews .faixa { background: linear-gradient(120deg, #4a0707 0%, var(--r2) 40%, var(--r1) 100%); }
-.compras .faixa { background: linear-gradient(120deg, var(--p2) 0%, var(--p1) 45%, var(--p3) 100%); }
-.faixa::after { content: ""; position: absolute; width: 340px; height: 340px; border-radius: 50%; right: -90px; top: -120px; background: rgba(255,255,255,.12); }
-.faixa .numero { font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: .9rem; letter-spacing: .14em; text-transform: uppercase; opacity: .85; }
-.faixa h2 { color: #fff; margin: 8px 0 10px; max-width: 18ch; }
-.reviews .faixa h2 em { font-style: normal; color: var(--r4); }
-.compras .faixa h2 em { font-style: normal; color: #ffd6e6; }
-.faixa p { margin: 0 0 22px; max-width: 62ch; color: rgba(255,255,255,.9); font-size: 1.06rem; }
-.faixa .botoes .botao { background: #fff; color: var(--tinta); box-shadow: none; }
-.faixa .botoes .botao.contorno { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.55); }
+.adesivo {
+  position: absolute; z-index: 3; right: -6px; bottom: -6px; background: var(--manteiga); color: var(--ameixa);
+  font-family: var(--mao); font-size: 1.45rem; line-height: 1.05; padding: 12px 18px; border-radius: 16px;
+  transform: rotate(-6deg); box-shadow: 0 10px 22px rgba(0,0,0,.25);
+}
+@keyframes girar { to { transform: rotate(360deg); } }
 
-.grade-2 { display: grid; grid-template-columns: 1.05fr 1fr; gap: 28px; align-items: start; }
-.bloco { background: var(--branco); border-radius: var(--raio); padding: 24px 26px; box-shadow: var(--sombra); }
-.bloco h3 { font-size: 1.3rem; margin: 0 0 12px; }
-.bloco p { margin: 0 0 10px; color: var(--tinta-2); }
-.bloco ul { margin: 0; padding-left: 20px; color: var(--tinta-2); }
-.bloco li { margin-bottom: 6px; }
-.bloco + .bloco { margin-top: 18px; }
+/* ---------------------------------------------------------------- letreiros */
+.letreiro { overflow: hidden; white-space: nowrap; border-block: 1px solid rgba(0,0,0,.08); }
+.letreiro .trilho { display: inline-flex; gap: 0; animation: correr 38s linear infinite; }
+.letreiro.volta .trilho { animation-direction: reverse; }
+.letreiro span {
+  display: inline-flex; align-items: center; gap: 26px; padding: 14px 13px; font-family: var(--titulo);
+  font-weight: 700; font-size: .95rem; letter-spacing: .12em; text-transform: uppercase;
+}
+.letreiro span::after { content: "✱"; font-size: 1.1rem; }
+.letreiro.rosa { background: var(--rosa); color: var(--ameixa); }
+.letreiro.rosa span::after { color: #fff; }
+.letreiro.manteiga { background: var(--manteiga-claro); color: var(--ameixa); }
+.letreiro.manteiga span::after { color: var(--rosa-forte); }
+@keyframes correr { to { transform: translateX(-50%); } }
+
+/* ---------------------------------------------------------------- seções */
+.secao { padding: 90px 0; }
+.cabeca { display: flex; justify-content: space-between; align-items: end; gap: 30px; flex-wrap: wrap; margin-bottom: 46px; }
+.cabeca h2 { font-size: clamp(2.6rem, 5.6vw, 4.6rem); margin: 10px 0 0; max-width: 15ch; }
+.cabeca p { max-width: 44ch; margin: 0; color: var(--tinta-2); }
+
+/* requisitos: linhas, sem caixas */
+.requisitos { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1.5px solid var(--tinta); }
+.req { padding: 28px 26px 30px 0; border-bottom: 1px solid var(--linha-escura); }
+.req:not(:nth-child(3n)) { border-right: 1px solid var(--linha-escura); }
+.req:not(:nth-child(3n+1)) { padding-left: 26px; }
+.req .icone {
+  width: 42px; height: 42px; border-radius: 12px; display: grid; place-items: center; font-size: 1.25rem;
+  background: var(--c); transform: rotate(-5deg); margin-bottom: 16px;
+}
+.req h3 { font-family: var(--titulo); font-size: 1.12rem; margin: 0 0 12px; letter-spacing: -0.01em; }
+.req ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 9px; }
+.req li { font-size: .92rem; color: var(--tinta-2); padding-left: 28px; position: relative; line-height: 1.5; }
+.req li::before {
+  position: absolute; left: 0; top: 2px; font-size: .66rem; font-weight: 800; padding: 1px 6px; border-radius: 6px;
+}
+.req li.r::before { content: "R"; background: var(--manteiga); color: var(--ameixa); }
+.req li.c::before { content: "C"; background: var(--rosa); color: var(--ameixa); }
+.req.destaque { background: var(--ameixa); color: #fff; padding-left: 26px; border-right: 0; }
+.req.destaque h3 { color: var(--manteiga); font-family: var(--serif); font-weight: 400; font-size: 2rem; line-height: 1.05; }
+.req.destaque p { color: #ead5df; font-size: .95rem; margin: 0 0 14px; }
+.legenda-req { display: flex; gap: 22px; flex-wrap: wrap; font-size: .88rem; color: var(--tinta-2); margin-top: 18px; }
+.legenda-req b { font-size: .7rem; font-weight: 800; padding: 1px 7px; border-radius: 6px; margin-right: 6px; color: var(--ameixa); }
+
+/* ---------------------------------------------------------------- projetos */
+.projeto { padding: 96px 0 90px; }
+.projeto.p1 { background: var(--manteiga); }
+.projeto.p2 { background: var(--rosa); }
+.projeto .abre { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+.projeto.p2 .abre { grid-template-columns: 1fr 1fr; }
+.projeto.p2 .abre .telas { order: -1; }
+.projeto .numero-grande {
+  font-family: var(--serif); font-style: italic; font-size: clamp(5rem, 12vw, 10rem); line-height: .8; color: var(--ameixa);
+  opacity: .14; position: absolute; right: 3%; top: 40px; pointer-events: none;
+}
+.projeto h2 { font-size: clamp(3rem, 6.6vw, 5.6rem); margin: 12px 0 18px; color: var(--ameixa); }
+.projeto h2 em { color: var(--rosa-forte); }
+.projeto.p2 h2 em { color: #fff; }
+.projeto .lead { font-size: 1.15rem; max-width: 46ch; margin: 0 0 26px; color: #3a2531; }
+.dupla { display: grid; grid-template-columns: 1fr 1fr; border-top: 1.5px solid var(--ameixa); margin-bottom: 30px; }
+.dupla div { padding: 18px 20px 4px 0; }
+.dupla div + div { border-left: 1px solid rgba(43,15,34,.25); padding-left: 20px; }
+.dupla h3 { font-family: var(--titulo); font-size: .78rem; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 8px; color: var(--ameixa); }
+.dupla p { margin: 0; font-size: .95rem; color: #3a2531; }
+
+.telas { position: relative; min-height: 430px; }
+.janela {
+  position: absolute; width: 86%; background: #fff; border-radius: 14px; overflow: hidden;
+  box-shadow: 0 26px 50px rgba(43,15,34,.28); border: 2px solid var(--ameixa);
+}
+.janela .barra { height: 26px; background: var(--ameixa); display: flex; align-items: center; gap: 6px; padding: 0 12px; }
+.janela .barra i { width: 9px; height: 9px; border-radius: 50%; background: var(--rosa); }
+.janela .barra i:nth-child(2) { background: var(--manteiga); }
+.janela .barra i:nth-child(3) { background: #fff; }
+.janela:nth-child(1) { top: 0; left: 0; transform: rotate(-3deg); }
+.janela:nth-child(2) { bottom: 0; right: 0; transform: rotate(3deg); }
+.telas .carimbo {
+  position: absolute; z-index: 4; left: 50%; top: 46%; transform: translate(-50%, -50%) rotate(-8deg);
+  background: var(--ameixa); color: var(--manteiga); font-family: var(--mao); font-size: 1.55rem; line-height: 1.05;
+  padding: 12px 18px; border-radius: 14px; text-align: center; box-shadow: 0 12px 26px rgba(0,0,0,.3);
+}
+.projeto.p2 .telas .carimbo { color: var(--rosa-claro); }
 
 /* vídeo */
 .video {
-  aspect-ratio: 16 / 9; border-radius: var(--raio); display: grid; place-items: center; text-align: center;
-  border: 3px dashed var(--c); background: repeating-linear-gradient(45deg, rgba(255,255,255,.75) 0 14px, rgba(255,255,255,.45) 14px 28px);
-  color: var(--tinta-2); padding: 20px; overflow: hidden;
+  margin: 70px auto 0; max-width: 1040px; aspect-ratio: 16 / 9; border-radius: 28px; overflow: hidden; position: relative;
+  background: var(--ameixa); color: #fff; display: grid; place-items: center; text-align: center;
 }
-.video .play { width: 74px; height: 74px; border-radius: 50%; background: var(--c); display: grid; place-items: center; margin: 0 auto 12px; box-shadow: 0 10px 26px color-mix(in srgb, var(--c) 40%, transparent); }
-.video .play::after { content: ""; border-left: 22px solid #fff; border-top: 14px solid transparent; border-bottom: 14px solid transparent; margin-left: 6px; }
-.video strong { display: block; color: var(--tinta); font-size: 1.05rem; }
-.video iframe, .video video { width: 100%; height: 100%; border: 0; border-radius: calc(var(--raio) - 4px); }
-.video.preenchido { border: 0; background: #000; padding: 0; }
+.video::before {
+  content: ""; position: absolute; inset: 14px; border: 2px dashed rgba(255,255,255,.28); border-radius: 18px;
+}
+.video .play {
+  width: 96px; height: 96px; border-radius: 50%; background: var(--rosa); display: grid; place-items: center; margin: 0 auto 16px;
+}
+.projeto.p2 .video .play { background: var(--manteiga); }
+.video .play::after { content: ""; border-left: 28px solid var(--ameixa); border-top: 17px solid transparent; border-bottom: 17px solid transparent; margin-left: 8px; }
+.video strong { font-family: var(--serif); font-weight: 400; font-size: clamp(1.8rem, 3.4vw, 2.8rem); display: block; line-height: 1.05; }
+.video span { color: #e6cdd9; font-size: .95rem; }
+.video iframe, .video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video.preenchido::before { display: none; }
 
-/* fluxo */
-.fluxo { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; margin: 30px 0; }
-.passo { flex: 1 1 150px; background: var(--branco); border-radius: 18px; padding: 16px; box-shadow: var(--sombra); border-top: 5px solid var(--c); }
-.passo .quem { font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--c); }
-.passo b { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; margin: 4px 0 4px; }
-.passo span { font-size: .86rem; color: var(--tinta-2); display: block; line-height: 1.45; }
-.seta { align-self: center; font-weight: 700; font-size: 1.4rem; color: var(--c); }
+/* fluxo: linha do tempo */
+.fluxo { display: grid; grid-template-columns: repeat(5, 1fr); gap: 18px; margin: 70px 0 0; position: relative; }
+.fluxo::before { content: ""; position: absolute; top: 27px; left: 8%; right: 8%; border-top: 2px dashed var(--ameixa); opacity: .4; }
+.etapa { text-align: center; position: relative; }
+.etapa .bola {
+  width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 14px; display: grid; place-items: center;
+  background: var(--ameixa); color: #fff; font-family: var(--titulo); font-weight: 700; font-size: 1.1rem;
+  border: 4px solid var(--fundo-projeto);
+}
+.p1 { --fundo-projeto: var(--manteiga); }
+.p2 { --fundo-projeto: var(--rosa); }
+.etapa .quem { font-size: .66rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--rosa-forte); }
+.p2 .etapa .quem { color: #fff; }
+.etapa h3 { font-family: var(--titulo); font-size: 1.05rem; margin: 2px 0 4px; color: var(--ameixa); }
+.etapa p { margin: 0; font-size: .86rem; color: #3a2531; line-height: 1.45; }
 
-/* números do projeto */
-.numeros { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 8px 0 30px; }
-.numeros div { background: var(--branco); border-radius: 18px; padding: 18px 20px; box-shadow: var(--sombra); }
-.numeros .num { font-size: clamp(1.7rem, 3.4vw, 2.4rem); font-weight: 700; display: block; color: var(--c); }
-.numeros span:last-child { font-size: .88rem; color: var(--tinta-2); display: block; line-height: 1.4; margin-top: 4px; }
+/* números */
+.numeros { display: grid; grid-template-columns: repeat(4, 1fr); margin: 70px 0 0; border-block: 1.5px solid var(--ameixa); }
+.numeros div { padding: 24px 20px 22px 0; }
+.numeros div + div { border-left: 1px solid rgba(43,15,34,.25); padding-left: 22px; }
+.numeros .n { font-family: var(--serif); font-size: clamp(2.6rem, 5vw, 4.2rem); line-height: 1; color: var(--ameixa); display: block; }
+.numeros .n em { color: var(--rosa-forte); }
+.p2 .numeros .n em { color: #fff; }
+.numeros span:last-child { font-size: .9rem; color: #3a2531; display: block; margin-top: 8px; line-height: 1.4; }
 
 /* decisões */
-.decisoes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
-.decisao { background: var(--branco); border-radius: 18px; padding: 20px; box-shadow: var(--sombra); }
-.decisao .emoji { font-size: 1.5rem; }
-.decisao h3 { font-size: 1.08rem; margin: 8px 0 6px; }
-.decisao p { margin: 0; font-size: .92rem; color: var(--tinta-2); }
+.decisoes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 34px; margin-top: 44px; }
+.decisao h3 { font-family: var(--titulo); font-size: 1.08rem; margin: 10px 0 6px; color: var(--ameixa); }
+.decisao p { margin: 0; font-size: .93rem; color: #3a2531; }
+.decisao .emoji { font-size: 1.6rem; }
+.links-projeto { display: flex; gap: 12px; flex-wrap: wrap; }
 
-/* aprendizados */
-.erros { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-.erro { background: var(--branco); border: 1px solid var(--linha); border-radius: var(--raio); padding: 22px 24px; box-shadow: var(--sombra); display: grid; grid-template-columns: auto 1fr; gap: 16px; }
-.erro .tag { writing-mode: vertical-rl; transform: rotate(180deg); font-size: .72rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #fff; background: var(--c); border-radius: 10px; padding: 10px 5px; text-align: center; }
-.erro h3 { font-size: 1.1rem; margin: 0 0 6px; }
-.erro p { margin: 0; color: var(--tinta-2); font-size: .94rem; }
-.erro p b { color: var(--tinta); }
+/* ---------------------------------------------------------------- erros */
+.erros { border-top: 1px solid var(--linha-clara); }
+.erro { display: grid; grid-template-columns: 110px 1fr 1fr; gap: 30px; padding: 30px 0; border-bottom: 1px solid var(--linha-clara); align-items: start; }
+.erro .idx { font-family: var(--serif); font-style: italic; font-size: 3.6rem; line-height: .9; color: var(--rosa); }
+.erro .projeto-tag { display: inline-block; font-size: .66rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; padding: 3px 9px; border-radius: 6px; margin-bottom: 10px; }
+.erro .projeto-tag.r { background: var(--manteiga); color: var(--ameixa); }
+.erro .projeto-tag.c { background: var(--rosa); color: var(--ameixa); }
+.erro h3 { font-family: var(--serif); font-weight: 400; font-size: 1.9rem; line-height: 1.08; margin: 0; color: #fff; }
+.erro p { margin: 0; color: #e6cdd9; }
+.erro p b { color: var(--manteiga); }
+.escura .cabeca p { color: #e6cdd9; }
+.escura .cabeca h2 em { color: var(--rosa); }
 
-/* princípios */
-.principios { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.principio { border-radius: var(--raio); padding: 24px; color: #fff; min-height: 190px; display: flex; flex-direction: column; justify-content: space-between; }
-.principio:nth-child(1) { background: linear-gradient(150deg, var(--r1), var(--r3)); }
-.principio:nth-child(2) { background: linear-gradient(150deg, var(--r3), #f2b705); color: #2a1c00; }
-.principio:nth-child(3) { background: linear-gradient(150deg, var(--p3), var(--p1)); }
-.principio:nth-child(4) { background: linear-gradient(150deg, var(--p1), #4a0b2a); }
-.principio .num { font-size: 2.6rem; font-weight: 700; opacity: .4; }
-.principio h3 { font-size: 1.2rem; margin: 0 0 6px; }
-.principio p { margin: 0; font-size: .92rem; opacity: .92; }
+/* ---------------------------------------------------------------- jeito de trabalhar */
+.jeito { display: grid; grid-template-columns: 1fr 1.1fr 1fr; gap: 40px; align-items: start; }
+.jeito h2 { font-size: clamp(2.6rem, 5vw, 4rem); margin: 10px 0 18px; }
+.jeito h2 em { color: var(--rosa-forte); }
+.citacao { background: var(--manteiga); padding: 34px 34px 30px; border-radius: 6px; transform: rotate(-1.5deg); box-shadow: 0 18px 34px rgba(43,15,34,.12); }
+.citacao .aspas { font-family: var(--serif); font-size: 4.4rem; line-height: .6; color: var(--rosa-forte); display: block; height: 34px; }
+.citacao p { font-family: var(--serif); font-size: 2rem; line-height: 1.12; margin: 0 0 16px; color: var(--ameixa); }
+.citacao .mao { color: var(--ameixa); }
+.principios { list-style: none; margin: 0; padding: 0; counter-reset: p; }
+.principios li { counter-increment: p; padding: 14px 0 14px 46px; border-bottom: 1px solid var(--linha-escura); position: relative; }
+.principios li::before { content: "0" counter(p); position: absolute; left: 0; top: 14px; font-family: var(--titulo); font-weight: 700; color: var(--rosa-forte); font-size: .95rem; }
+.principios b { display: block; font-family: var(--titulo); font-size: 1.02rem; }
+.principios span { font-size: .9rem; color: var(--tinta-2); }
+.ferramentas { display: flex; flex-wrap: wrap; gap: 9px; margin-top: 16px; }
+.ferramentas span { border: 1.5px solid var(--ameixa); border-radius: 10px; padding: 7px 13px; font-family: var(--titulo); font-weight: 700; font-size: .8rem; letter-spacing: .06em; text-transform: uppercase; }
+.ferramentas span.cheia { background: var(--rosa); border-color: var(--rosa); }
+.ferramentas span.amarela { background: var(--manteiga); border-color: var(--manteiga); }
 
-/* stack */
-.stack { display: flex; flex-wrap: wrap; gap: 10px; }
-.stack span { background: var(--branco); border: 1px solid var(--linha); border-radius: 999px; padding: 8px 16px; font-weight: 600; font-size: .92rem; box-shadow: var(--sombra); }
-.stack span::before { content: "●"; margin-right: 8px; color: var(--c, var(--r1)); }
-
-/* contato */
-footer { padding: 30px 0 60px; }
-.contato {
-  border-radius: 34px; padding: clamp(28px, 6vw, 64px); color: #fff; text-align: center;
-  background: linear-gradient(120deg, var(--r2) 0%, var(--r1) 30%, var(--r3) 55%, var(--p3) 80%, var(--p1) 100%);
+/* ---------------------------------------------------------------- contato */
+.convite { background: var(--rosa); padding: 90px 0; }
+.convite .envelope { display: grid; grid-template-columns: 1.2fr .8fr; gap: 40px; align-items: center; position: relative; }
+.convite h2 { font-size: clamp(2.8rem, 5.6vw, 5rem); margin: 10px 0 0; color: var(--ameixa); }
+.convite h2 em { color: #fff; }
+.estrela { position: absolute; right: 30%; top: -40px; width: 230px; height: 230px; opacity: .45; pointer-events: none; }
+.contatos { display: grid; gap: 12px; position: relative; z-index: 1; }
+.contatos a {
+  display: flex; align-items: center; gap: 14px; text-decoration: none; padding: 14px 0; border-bottom: 1.5px solid var(--ameixa);
+  font-weight: 600; color: var(--ameixa); word-break: break-all;
 }
-.contato h2 { color: #fff; margin: 0 auto 12px; max-width: 18ch; }
-.contato p { margin: 0 auto 26px; max-width: 54ch; opacity: .92; }
-.contato .botoes { justify-content: center; }
-.contato .botao { background: #fff; color: var(--tinta); }
-.rodape { text-align: center; color: var(--tinta-3); font-size: .85rem; margin-top: 22px; }
+.contatos a .ic { width: 38px; height: 38px; border-radius: 50%; background: var(--ameixa); color: var(--rosa); display: grid; place-items: center; flex: none; font-size: 1rem; }
+.contatos a:hover { color: #fff; }
 
-/* animação de entrada */
-.surge { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+footer .envelope { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 28px 0; flex-wrap: wrap; }
+footer nav { display: flex; gap: 22px; flex-wrap: wrap; }
+footer nav a { text-decoration: none; font-size: .82rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #f1dce6; }
+footer small { color: #cdb2c1; font-size: .8rem; display: block; }
+
+/* entrada suave */
+.surge { opacity: 0; transform: translateY(20px); transition: opacity .7s ease, transform .7s ease; }
 .surge.visivel { opacity: 1; transform: none; }
+.janela.surge.visivel:nth-child(1) { transform: rotate(-3deg); }
+.janela.surge.visivel:nth-child(2) { transform: rotate(3deg); }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .surge { opacity: 1; transform: none; transition: none; }
-  .botao { transition: none; }
+  .letreiro .trilho, .selo-girando .roda { animation: none; }
+  .surge { opacity: 1; transition: none; }
+  .surge:not(.janela) { transform: none; }
+  .pilula { transition: none; }
 }
 
-/* ---------- telas menores */
-@media (max-width: 960px) {
-  .grade-2 { grid-template-columns: 1fr; }
-  .decisoes { grid-template-columns: 1fr; }
-  .principios { grid-template-columns: repeat(2, 1fr); }
-  .placar, .numeros { grid-template-columns: repeat(2, 1fr); }
-  .erros { grid-template-columns: 1fr; }
+/* ---------------------------------------------------------------- telas menores */
+@media (max-width: 980px) {
+  .topo nav { display: none; }
+  .capa .envelope, .projeto .abre, .projeto.p2 .abre, .convite .envelope, .jeito { grid-template-columns: 1fr; }
+  .projeto.p2 .abre .telas { order: 0; }
+  .requisitos { grid-template-columns: 1fr 1fr; }
+  .req, .req:not(:nth-child(3n+1)) { padding: 26px 20px 26px 0; border-right: 0; }
+  .req:nth-child(odd) { border-right: 1px solid var(--linha-escura); }
+  .req:nth-child(even) { padding-left: 20px; }
+  .fluxo { grid-template-columns: 1fr; gap: 0; }
+  .fluxo::before { left: 27px; right: auto; top: 20px; bottom: 20px; border-top: 0; border-left: 2px dashed var(--ameixa); }
+  .etapa { display: grid; grid-template-columns: 56px 1fr; gap: 16px; text-align: left; padding: 10px 0; }
+  .etapa .bola { margin: 0; }
+  .numeros { grid-template-columns: 1fr 1fr; }
+  .numeros div:nth-child(3) { border-left: 0; padding-left: 0; }
+  .numeros div:nth-child(n+3) { border-top: 1px solid rgba(43,15,34,.25); }
+  .decisoes { grid-template-columns: 1fr; gap: 24px; }
+  .erro { grid-template-columns: 70px 1fr; }
+  .erro p { grid-column: 2; }
+  .retrato-area { min-height: 420px; max-width: 480px; }
+  .estrela { right: 0; }
 }
-@media (max-width: 640px) {
+@media (max-width: 620px) {
   body { font-size: 16px; }
-  nav ul { display: none; }
-  .capa { padding: 56px 0 40px; }
-  section { padding: 48px 0; }
-  .seta { display: none; }
-  .principios { grid-template-columns: 1fr; }
-  .matriz { grid-template-columns: 1fr; }
+  .subtopo .envelope span:last-child { display: none; }
+  .topo .pilula { display: none; }
+  .capa .envelope { padding: 46px 0 70px; }
+  .secao, .projeto, .convite { padding: 64px 0; }
+  .requisitos { grid-template-columns: 1fr; }
+  .req, .req:nth-child(even), .req:nth-child(odd) { padding: 24px 0; border-right: 0; }
+  .req.destaque { padding: 24px 20px; }
+  .dupla { grid-template-columns: 1fr; }
+  .dupla div + div { border-left: 0; padding-left: 0; border-top: 1px solid rgba(43,15,34,.25); }
+  .telas { min-height: 300px; }
+  .retrato-area { min-height: 380px; }
+  .selo-girando { width: 104px; height: 104px; left: -6px; }
+  .selo-girando .miolo { inset: 27px; font-size: 1.3rem; }
+  .video .play { width: 64px; height: 64px; }
+  .video .play::after { border-left-width: 20px; border-top-width: 12px; border-bottom-width: 12px; }
+  .video span { display: none; }
 }
 </style>
 </head>
 <body>
 
-<nav>
-  <a class="marca" href="#topo">Yasmin <span>Santos</span></a>
-  <ul>
-    <li><a class="item" href="#competencias">Competências</a></li>
-    <li><a class="item" href="#reviews">Central de reviews</a></li>
-    <li><a class="item" href="#compras">Assistente de compras</a></li>
-    <li><a class="item" href="#aprendizados">Aprendizados</a></li>
-    <li><a class="item" href="#contato">Contato</a></li>
-  </ul>
-</nav>
-
-<!-- ======================================================= CAPA -->
-<header class="capa envelope" id="topo">
-  <div class="manchas" aria-hidden="true"><i></i><i></i><i></i></div>
-  <span class="selo"><b>AI Builder</b> IA aplicada a negócios</span>
-  <h1>Transformo IA em <em>solução que funciona.</em></h1>
-  <p class="intro">
-    Dois projetos completos, do dado bruto ao produto publicado: agentes que decidem com segurança,
-    prompts avaliados com métrica, automação, integração com APIs e análise de dados.
-    Sempre com o custo sob controle e uma pessoa no circuito onde o risco é alto.
-  </p>
-  <div class="botoes">
-    <a class="botao r" href="#reviews">🛰️ Central de reviews com IA</a>
-    <a class="botao p" href="#compras">🛒 Assistente de compras com IA</a>
+<!-- ================================================================ CAPA -->
+<div class="faixa escura">
+  <header class="topo">
+    <div class="envelope">
+      <a class="logo" href="#inicio"><span class="mono">Y<b>S</b>.</span><span class="nome">Yasmin Santos<small>AI Builder · IA para negócios</small></span></a>
+      <nav>
+        <a href="#requisitos">Competências</a>
+        <a href="#central">Projetos</a>
+        <a href="#aprendizados">Aprendizados</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <a class="pilula contorno-claro" href="#contato">Vamos conversar ↗</a>
+    </div>
+  </header>
+  <div class="subtopo">
+    <div class="envelope"><span>IA aplicada que sai do papel</span><span>Role para explorar ↓</span></div>
   </div>
 
-  <div class="placar">
-    <div class="surge"><span class="num">2</span><span>projetos publicados e abertos para testar</span></div>
-    <div class="surge"><span class="num">90%</span><span>das reviews resolvidas sem humano</span></div>
-    <div class="surge"><span class="num">≈ 23 h</span><span>de trabalho manual economizadas em 25 h</span></div>
-    <div class="surge"><span class="num">US$ 0</span><span>para abrir as demos: nada chama IA sem necessidade</span></div>
-  </div>
-</header>
+  <section class="capa" id="inicio">
+    <div class="envelope">
+      <div>
+        <h1 class="serif">IA que sai do <em>slide</em> e vira <span class="sublinhado"><em>solução.</em><svg viewBox="0 0 300 20" preserveAspectRatio="none" aria-hidden="true"><path d="M3 14 C 70 4, 150 4, 297 12" stroke="#ffe98a" stroke-width="6" fill="none" stroke-linecap="round"/></svg></span></h1>
+        <p class="oi">Oi, eu sou <b>Yasmin Santos</b>. Construo soluções com IA de ponta a ponta: agentes que decidem com segurança,
+          prompts medidos contra gabarito, automação, APIs e análise de dados. Sempre com custo sob controle e
+          uma pessoa no circuito quando o risco é alto.</p>
+        <div class="botoes">
+          <a class="pilula creme" href="#central">Ver os projetos ↗</a>
+          <a class="pilula contorno-claro" href="#contato">Diga oi ↗</a>
+        </div>
+      </div>
+
+      <div class="retrato-area">
+        <div class="selo-girando" aria-hidden="true">
+          <svg class="roda" viewBox="0 0 200 200">
+            <defs><path id="circulo" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
+            <circle cx="100" cy="100" r="98" fill="#ef4f8b"/>
+            <text font-family="Space Grotesk, sans-serif" font-weight="700" font-size="19" letter-spacing="3.2" fill="#fff">
+              <textPath href="#circulo">AI BUILDER ✱ IA PARA NEGÓCIOS ✱ </textPath>
+            </text>
+          </svg>
+          <div class="miolo">✱</div>
+        </div>
+
+        <!-- FOTO: salve sua foto como img/foto.jpg (vertical, de preferência).
+             Sem a foto, aparece uma colagem com os prints dos dois projetos. -->
+        <div class="retrato">
+          <img class="foto" src="img/foto.jpg" alt="Foto de Yasmin Santos" onerror="this.parentElement.classList.add('sem-foto')">
+          <div class="colagem" aria-hidden="true">
+            <img src="img/central_capa.jpg" alt="">
+            <img src="img/compras_capa.jpg" alt="">
+          </div>
+          <span class="legenda-foto">2 projetos no ar</span>
+        </div>
+        <div class="adesivo">feito com<br>dados reais ✿</div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ================================================================ LETREIROS -->
+<div class="letreiro rosa" aria-hidden="true"><div class="trilho">
+  <span>Prompt engineering</span><span>Agentes de IA</span><span>Automação</span><span>APIs e integrações</span><span>Análise de dados</span><span>IA responsável</span>
+  <span>Prompt engineering</span><span>Agentes de IA</span><span>Automação</span><span>APIs e integrações</span><span>Análise de dados</span><span>IA responsável</span>
+</div></div>
+<div class="letreiro manteiga volta" aria-hidden="true"><div class="trilho">
+  <span>90% resolvidas sem humano</span><span>30 de 30 casos graves no gerente</span><span>≈ 23 h economizadas</span><span>78% das notas lidas por foto</span><span>US$ 0 para abrir as demos</span>
+  <span>90% resolvidas sem humano</span><span>30 de 30 casos graves no gerente</span><span>≈ 23 h economizadas</span><span>78% das notas lidas por foto</span><span>US$ 0 para abrir as demos</span>
+</div></div>
 
 <main>
 
-<!-- ======================================================= COMPETÊNCIAS -->
-<section id="competencias">
+<!-- ================================================================ REQUISITOS -->
+<section class="secao" id="requisitos">
   <div class="envelope">
-    <span class="rotulo">O que a vaga pede</span>
-    <h2>Cada requisito, com prova no código</h2>
-    <p class="sub">Nada aqui é promessa: cada item aponta para algo que roda nos projetos publicados.</p>
-    <div class="legenda">
-      <span><b style="background:var(--r1)">R</b>Central de reviews</span>
-      <span><b style="background:var(--p1)">C</b>Assistente de compras</span>
+    <div class="cabeca">
+      <div>
+        <span class="etiqueta vinho">01 / O que a vaga pede</span>
+        <h2 class="serif">Cada requisito, <em>com prova.</em></h2>
+      </div>
+      <p>Nada aqui é promessa. Cada item aponta para algo que já roda nos dois projetos publicados.</p>
     </div>
 
-    <div class="matriz">
-      <article class="comp surge" style="--c: var(--r1)">
-        <div class="ic">🧠</div>
+    <div class="requisitos">
+      <div class="req surge" style="--c: var(--manteiga)">
+        <div class="icone">🧠</div>
         <h3>Prompt engineering avançado</h3>
         <ul>
-          <li class="r">4 versões do prompt de classificação, medidas contra um gabarito de 50 reviews rotuladas: acurácia de tema de 60% para 80%.</li>
-          <li class="r">Saída em JSON validada (Pydantic) com nova tentativa automática: só 0,7% veio inválida.</li>
-          <li class="m">Regras nascidas de erros reais: a análise de hábitos passou a priorizar o maior gasto e citar números do histórico.</li>
+          <li class="r">4 versões do prompt medidas contra um gabarito de 50 reviews: acerto de tema de 60% para 80%.</li>
+          <li class="r">Saída em JSON validada, com nova tentativa automática: só 0,7% veio inválida.</li>
+          <li class="c">Regras nascidas de erros reais, como priorizar o maior gasto.</li>
         </ul>
-      </article>
-
-      <article class="comp surge" style="--c: var(--r3)">
-        <div class="ic">🤖</div>
+      </div>
+      <div class="req surge" style="--c: var(--rosa)">
+        <div class="icone">🤖</div>
         <h3>Orquestração de agentes</h3>
         <ul>
-          <li class="r">Classificador, decisor, redator e revisor, cada um com prompt versionado e papel claro.</li>
+          <li class="r">Classificador, decisor, redator e revisor, cada um com papel e prompt próprios.</li>
           <li class="r">Travas em código: caso grave sempre vai para o gerente, mesmo que a IA discorde.</li>
-          <li class="m">A IA sugere e o código confere: sugestão que cita algo inexistente ou promete economia impossível é descartada.</li>
+          <li class="c">A IA sugere e o código confere: sugestão inventada é descartada.</li>
         </ul>
-      </article>
-
-      <article class="comp surge" style="--c: #e0a100">
-        <div class="ic">⚡</div>
+      </div>
+      <div class="req surge" style="--c: #ffc9a8">
+        <div class="icone">⚡</div>
         <h3>Automação</h3>
         <ul>
-          <li class="r">Arquivo novo na pasta de entrada é processado sozinho; caso grave dispara alerta por webhook (Slack, Teams ou Discord).</li>
-          <li class="m">Uma foto da nota fiscal vira histórico de compras sem digitar nada.</li>
-          <li class="m">Lista de compras montada sozinha a partir do consumo de cada pessoa.</li>
+          <li class="r">Arquivo novo é processado sozinho; caso grave dispara alerta por webhook.</li>
+          <li class="c">Uma foto da nota fiscal vira histórico, sem digitar nada.</li>
+          <li class="c">Lista de compras montada a partir do consumo de cada pessoa.</li>
         </ul>
-      </article>
-
-      <article class="comp surge" style="--c: var(--p3)">
-        <div class="ic">🔌</div>
+      </div>
+      <div class="req surge" style="--c: #c9d3ff">
+        <div class="icone">🔌</div>
         <h3>APIs e integrações</h3>
         <ul>
-          <li class="r">Uma camada única para todos os modelos (litellm): trocar entre modelo local e API é mudar uma linha de configuração.</li>
-          <li class="m">Nota oficial da Sefaz lida pelo QR code, sem captcha; modelo de visão como plano B.</li>
-          <li class="r">Cache em disco, novas tentativas e registro de tokens, custo e tempo de cada chamada.</li>
+          <li class="r">Uma camada única para todos os modelos: trocar local por API é mudar uma linha.</li>
+          <li class="c">Nota oficial da Sefaz pelo QR code; modelo de visão como plano B.</li>
+          <li class="r">Cache, novas tentativas e registro de custo e tempo de cada chamada.</li>
         </ul>
-      </article>
-
-      <article class="comp surge" style="--c: var(--p1)">
-        <div class="ic">📊</div>
+      </div>
+      <div class="req surge" style="--c: var(--manteiga)">
+        <div class="icone">📊</div>
         <h3>Análise de dados com IA</h3>
         <ul>
-          <li class="r">Dashboard com mapa das lojas, ranking, fila de escalados e qualidade da IA.</li>
-          <li class="r">Comparação entre modelos com teste estatístico (McNemar) e mapa de concordância.</li>
-          <li class="m">Recorrência de compra, despensa e um histórico de 2 anos com 200 compras.</li>
+          <li class="r">Dashboard com mapa, ranking, fila de escalados e qualidade da IA.</li>
+          <li class="r">Comparação de modelos com teste estatístico e mapa de concordância.</li>
+          <li class="c">Recorrência de compra e um histórico de 2 anos com 200 compras.</li>
         </ul>
-      </article>
-
-      <article class="comp surge" style="--c: var(--roxo)">
-        <div class="ic">💼</div>
+      </div>
+      <div class="req surge" style="--c: var(--rosa)">
+        <div class="icone">💼</div>
         <h3>Visão de negócio</h3>
         <ul>
-          <li class="r">Impacto em horas economizadas, com a premissa visível e ajustável na tela.</li>
-          <li class="r">Custo por 1.000 reviews na API (~US$ 0,51) contra modelo local gratuito, mas 13× mais lento.</li>
-          <li class="m">Análise por meta (economizar, comer melhor, ganhar massa, emagrecer) com economia estimada em reais.</li>
+          <li class="r">Impacto em horas economizadas, com a premissa visível na tela.</li>
+          <li class="r">Custo por 1.000 reviews na API (~US$ 0,51) contra modelo local gratuito.</li>
+          <li class="c">Análise por meta: economizar, comer melhor, ganhar massa ou emagrecer.</li>
         </ul>
-      </article>
-
-      <article class="comp surge" style="--c: var(--verde)">
-        <div class="ic">🛡️</div>
+      </div>
+      <div class="req surge" style="--c: #c8f0dc">
+        <div class="icone">🛡️</div>
         <h3>IA responsável</h3>
         <ul>
-          <li class="r">Humano no circuito onde o erro é caro: saúde, segurança, discriminação e ameaça.</li>
-          <li class="m">Privacidade por padrão: CPF nunca é lido, a loja vira apelido e remédio vira "item de farmácia".</li>
-          <li class="m">Nenhum processamento em lote sem estimativa de custo e confirmação antes.</li>
+          <li class="r">Humano no circuito onde o erro é caro: saúde, segurança e ameaça.</li>
+          <li class="c">CPF nunca é lido, a loja vira apelido e remédio vira "item de farmácia".</li>
+          <li class="c">Nada roda em lote sem estimativa de custo antes.</li>
         </ul>
-      </article>
+      </div>
+      <div class="req destaque surge">
+        <h3>Do dado bruto ao produto publicado.</h3>
+        <p>Os dois projetos estão no ar, com código aberto e testes automatizados.</p>
+        <span class="mao" style="color: var(--rosa)">pode clicar e testar ↓</span>
+      </div>
+      <div class="req surge" style="--c: var(--manteiga)">
+        <div class="icone">🧪</div>
+        <h3>Qualidade medida</h3>
+        <ul>
+          <li class="r">Modelo local × API no mesmo gabarito: 96% de acerto no tema com a API.</li>
+          <li class="c">Leitura de 51 notas conferida pela própria matemática da nota.</li>
+          <li class="c">Testes automáticos sem nenhuma chamada paga.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="legenda-req">
+      <span><b style="background: var(--manteiga)">R</b>Central de reviews</span>
+      <span><b style="background: var(--rosa)">C</b>Assistente de compras</span>
     </div>
   </div>
 </section>
 
-<!-- ======================================================= PROJETO 1 -->
-<section id="reviews">
+<!-- ================================================================ PROJETO 1 -->
+<section class="projeto p1 faixa" id="central">
+  <div class="numero-grande" aria-hidden="true">01</div>
   <div class="envelope">
-    <div class="projeto reviews">
-      <div class="faixa">
-        <div class="numero">Projeto 01 · Operações</div>
-        <h2>Central de operações de reviews <em>com IA</em></h2>
-        <p>
-          Agentes de IA leem as avaliações de uma rede de restaurantes, entendem o problema, decidem o que fazer
-          e escrevem a resposta ao cliente. Os casos graves sempre chegam a uma pessoa.
-        </p>
-        <div class="botoes">
-          <a class="botao" href="https://central-reviews-ai.streamlit.app/" target="_blank" rel="noopener">▶ Abrir a demo</a>
-          <a class="botao contorno" href="https://github.com/yasmin-rs/Portifolio" target="_blank" rel="noopener">Ver o código</a>
+    <div class="abre">
+      <div>
+        <span class="etiqueta vinho">02 / Projeto · Operações</span>
+        <h2 class="serif">Central de reviews <em>com IA.</em></h2>
+        <p class="lead">Agentes leem as avaliações de uma rede de restaurantes, entendem o problema, decidem o que fazer
+          e escrevem a resposta. Os casos graves sempre chegam a uma pessoa.</p>
+        <div class="dupla">
+          <div><h3>O problema</h3><p>Ninguém lê centenas de avaliações. Casos graves, como cliente que passou mal, se perdem no meio e o gerente não sabe onde atacar.</p></div>
+          <div><h3>A solução</h3><p>Triagem automática com 4 agentes, regra de segurança em código, alertas e um dashboard que mostra cada decisão da IA.</p></div>
+        </div>
+        <div class="links-projeto">
+          <a class="pilula ameixa" href="https://central-reviews-ai.streamlit.app/" target="_blank" rel="noopener">▶ Abrir a demo</a>
+          <a class="pilula contorno-escuro" href="https://github.com/yasmin-rs/Portifolio" target="_blank" rel="noopener">Ver o código ↗</a>
         </div>
       </div>
-
-      <div class="grade-2">
-        <div>
-          <div class="bloco surge">
-            <h3>😩 O problema</h3>
-            <ul>
-              <li>Uma rede com dezenas de lojas recebe centenas de avaliações, e <b>ninguém lê tudo</b>.</li>
-              <li>Os <b>casos graves se perdem no meio</b>: inseto na comida, cliente que passou mal, discriminação.</li>
-              <li>Responder uma por uma é lento e as respostas saem inconsistentes.</li>
-              <li>O gerente não sabe <b>qual problema</b> atacar primeiro nem <b>em qual loja</b>.</li>
-            </ul>
-          </div>
-          <div class="bloco surge">
-            <h3>💡 A solução</h3>
-            <p>Um pipeline que faz a triagem sozinho e só chama uma pessoa quando precisa, com um dashboard
-              que mostra onde está cada problema e como a IA chegou em cada decisão.</p>
-          </div>
-        </div>
-
-        <!-- =========================================================
-             VÍDEO DA CENTRAL DE REVIEWS
-             Para colocar o vídeo, troque o bloco <div class="video">...</div> abaixo por UMA das opções:
-
-             YouTube (use o link "embed"):
-             <div class="video preenchido" style="--c: var(--r1)">
-               <iframe src="https://www.youtube.com/embed/ID_DO_VIDEO" title="Demonstração da Central de reviews"
-                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-             </div>
-
-             Arquivo de vídeo no próprio repositório (ex.: videos/central.mp4):
-             <div class="video preenchido" style="--c: var(--r1)">
-               <video src="videos/central.mp4" controls preload="metadata"></video>
-             </div>
-        ========================================================== -->
-        <div class="video surge" style="--c: var(--r1)">
-          <div>
-            <div class="play"></div>
-            <strong>Vídeo de demonstração</strong>
-            <span>em breve: 2 minutos mostrando a central funcionando</span>
-          </div>
-        </div>
+      <div class="telas">
+        <div class="janela surge"><div class="barra"><i></i><i></i><i></i></div><img src="img/central_capa.jpg" alt="Tela inicial da Central de reviews com os números principais"></div>
+        <div class="janela surge"><div class="barra"><i></i><i></i><i></i></div><img src="img/central_agentes.jpg" alt="Aba que mostra cada decisão dos agentes para uma review"></div>
+        <div class="carimbo">30 de 30<br>graves no gerente</div>
       </div>
+    </div>
 
-      <div class="fluxo">
-        <div class="passo surge" style="--c:#c2410c"><div class="quem">🤖 IA</div><b>1. Classificador</b><span>Define tema, sentimento e gravidade.</span></div>
-        <div class="seta" style="--c:var(--r1)">→</div>
-        <div class="passo surge" style="--c:var(--r1)"><div class="quem">⚙️ Código</div><b>2. Regra de segurança</b><span>Saúde, segurança ou ameaça? Vira grave, diga a IA o que disser.</span></div>
-        <div class="seta" style="--c:var(--r1)">→</div>
-        <div class="passo surge" style="--c:var(--r2)"><div class="quem">🤖 IA + ⚙️ código</div><b>3. Decisor</b><span>Ignorar, responder ou escalar. Grave sempre escala.</span></div>
-        <div class="seta" style="--c:var(--r1)">→</div>
-        <div class="passo surge" style="--c:#b45309"><div class="quem">🤖 IA</div><b>4. Redator</b><span>Escreve a resposta, sem prometer reembolso nem cupom.</span></div>
-        <div class="seta" style="--c:var(--r1)">→</div>
-        <div class="passo surge" style="--c:#6b3a32"><div class="quem">🤖 IA + ⚙️ código</div><b>5. Revisor</b><span>Confere tom e promessas. Reprovou duas vezes, vai para uma pessoa.</span></div>
-      </div>
+    <!-- ============================================================
+         VÍDEO DA CENTRAL DE REVIEWS: troque o bloco <div class="video">...</div> por UMA opção:
 
-      <div class="numeros" style="--c: var(--r1)">
-        <div class="surge"><span class="num">30 de 30</span><span>casos graves encaminhados ao gerente</span></div>
-        <div class="surge" style="--c: var(--r3)"><span class="num">90%</span><span>resolvidas sem humano em 500 reviews</span></div>
-        <div class="surge" style="--c: var(--r2)"><span class="num">96%</span><span>de acerto no tema com o melhor modelo e prompt</span></div>
-        <div class="surge" style="--c: #b45309"><span class="num">~2 dias</span><span>do zero ao dashboard publicado</span></div>
-      </div>
+         YouTube (link "embed", pode ser vídeo não listado):
+         <div class="video preenchido">
+           <iframe src="https://www.youtube.com/embed/ID_DO_VIDEO" title="Demonstração da Central de reviews"
+             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+         </div>
 
-      <div class="decisoes">
-        <div class="decisao surge"><div class="emoji">🔒</div><h3>A IA não decide o que é grave sozinha</h3>
-          <p>Uma regra em código pegou 6 casos graves que o modelo tinha classificado como leves.</p></div>
-        <div class="decisao surge"><div class="emoji">⚖️</div><h3>Discordância vira fila de revisão</h3>
-          <p>Onde o modelo local e a API discordam, uma pessoa olha. Marcar grave de menos é o erro mais caro.</p></div>
-        <div class="decisao surge"><div class="emoji">💸</div><h3>Custo escolhido, não descoberto</h3>
-          <p>Local e gratuito para desenvolver; API 13× mais rápida por ~US$ 0,51 a cada 1.000 reviews.</p></div>
-      </div>
+         Arquivo no repositório (menos de 100 MB), ex.: videos/central.mp4
+         <div class="video preenchido"><video src="videos/central.mp4" controls preload="metadata"></video></div>
+    ============================================================= -->
+    <div class="video surge">
+      <div><div class="play"></div><strong>A central em ação</strong><span>vídeo de demonstração em breve</span></div>
+    </div>
+
+    <div class="fluxo">
+      <div class="etapa surge"><div class="bola">1</div><div><div class="quem">IA</div><h3>Classificador</h3><p>Define tema, sentimento e gravidade.</p></div></div>
+      <div class="etapa surge"><div class="bola">2</div><div><div class="quem">Código</div><h3>Regra de segurança</h3><p>Saúde ou ameaça? Vira grave, diga a IA o que disser.</p></div></div>
+      <div class="etapa surge"><div class="bola">3</div><div><div class="quem">IA + código</div><h3>Decisor</h3><p>Ignorar, responder ou escalar ao gerente.</p></div></div>
+      <div class="etapa surge"><div class="bola">4</div><div><div class="quem">IA</div><h3>Redator</h3><p>Escreve a resposta, sem prometer reembolso.</p></div></div>
+      <div class="etapa surge"><div class="bola">5</div><div><div class="quem">IA + código</div><h3>Revisor</h3><p>Reprovou duas vezes? Vai para uma pessoa.</p></div></div>
+    </div>
+
+    <div class="numeros">
+      <div class="surge"><span class="n"><em>90%</em></span><span>das 500 reviews resolvidas sem humano</span></div>
+      <div class="surge"><span class="n">≈ 23 h</span><span>economizadas em 25 h de trabalho manual</span></div>
+      <div class="surge"><span class="n">96%</span><span>de acerto no tema com o melhor modelo</span></div>
+      <div class="surge"><span class="n">US$ 0,51</span><span>por 1.000 reviews na API, 13× mais rápida que o local</span></div>
+    </div>
+
+    <div class="decisoes">
+      <div class="decisao surge"><span class="emoji">🔒</span><h3>A IA não decide sozinha o que é grave</h3><p>Uma regra em código pegou 6 casos graves que o modelo tinha classificado como leves.</p></div>
+      <div class="decisao surge"><span class="emoji">⚖️</span><h3>Discordância vira fila de revisão</h3><p>Onde o modelo local e a API discordam, uma pessoa olha primeiro. Deixar passar um caso grave é o erro mais caro.</p></div>
+      <div class="decisao surge"><span class="emoji">💸</span><h3>Custo escolhido, não descoberto</h3><p>Modelo local e gratuito para desenvolver; API quando velocidade importa. A demo não gasta nada.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ======================================================= PROJETO 2 -->
-<section id="compras">
+<!-- ================================================================ PROJETO 2 -->
+<section class="projeto p2 faixa" id="compras">
+  <div class="numero-grande" aria-hidden="true" style="left: 3%; right: auto;">02</div>
   <div class="envelope">
-    <div class="projeto compras">
-      <div class="faixa">
-        <div class="numero">Projeto 02 · Consumidor</div>
-        <h2>Assistente de compras <em>com IA</em></h2>
-        <p>
-          Uma foto da nota do mercado vira histórico de gastos, aviso do que está acabando,
-          lista de compras pronta e uma análise dos hábitos de acordo com a meta da pessoa.
-        </p>
-        <div class="botoes">
-          <a class="botao" href="https://assistente-compras-ai.streamlit.app/" target="_blank" rel="noopener">▶ Abrir a demo</a>
-          <a class="botao contorno" href="https://github.com/yasmin-rs/mercado" target="_blank" rel="noopener">Ver o código</a>
+    <div class="abre">
+      <div class="telas">
+        <div class="janela surge"><div class="barra"><i></i><i></i><i></i></div><img src="img/compras_capa.jpg" alt="Histórico de 2 anos de compras no Assistente de compras"></div>
+        <div class="janela surge"><div class="barra"><i></i><i></i><i></i></div><img src="img/compras_despensa.jpg" alt="Resposta para a pergunta preciso comprar leite"></div>
+        <div class="carimbo">"preciso<br>comprar leite?"</div>
+      </div>
+      <div>
+        <span class="etiqueta" style="color: var(--ameixa)">03 / Projeto · Consumidor</span>
+        <h2 class="serif">Assistente de compras <em>com IA.</em></h2>
+        <p class="lead">Uma foto da nota do mercado vira histórico de gastos, aviso do que está acabando, lista de
+          compras pronta e uma análise dos hábitos de acordo com a meta da pessoa.</p>
+        <div class="dupla">
+          <div><h3>O problema</h3><p>Ninguém sabe quanto gasta no mercado. A informação está na nota, mas em papel que apaga e nomes como OVO BCO EXT YAN.</p></div>
+          <div><h3>A solução</h3><p>Lê o QR da Sefaz ou a foto, confere a conta em código, padroniza nomes com IA e responde perguntas do dia a dia.</p></div>
+        </div>
+        <div class="links-projeto">
+          <a class="pilula ameixa" href="https://assistente-compras-ai.streamlit.app/" target="_blank" rel="noopener">▶ Abrir a demo</a>
+          <a class="pilula contorno-escuro" href="https://github.com/yasmin-rs/mercado" target="_blank" rel="noopener">Ver o código ↗</a>
         </div>
       </div>
+    </div>
 
-      <div class="grade-2">
-        <div>
-          <div class="bloco surge">
-            <h3>😩 O problema</h3>
-            <ul>
-              <li>Quase ninguém sabe <b>quanto gasta no mercado</b>, com o quê, nem de quanto em quanto tempo compra cada coisa.</li>
-              <li>A informação existe na nota fiscal, mas presa em papel que apaga e nomes como <b>OVO BCO EXT YAN</b>.</li>
-              <li>Um número errado no histórico estraga todas as análises de depois.</li>
-            </ul>
-          </div>
-          <div class="bloco surge">
-            <h3>💡 A solução</h3>
-            <p>Lê a nota pelo QR code (dados oficiais da Sefaz) ou pela foto, confere a matemática em código,
-              padroniza os nomes com IA e transforma tudo em respostas do dia a dia, como
-              <b>"preciso comprar leite?"</b></p>
-          </div>
-        </div>
+    <!-- ============================================================
+         VÍDEO DO ASSISTENTE DE COMPRAS: mesmo jeito do vídeo da Central.
+         <div class="video preenchido"><iframe src="https://www.youtube.com/embed/ID_DO_VIDEO" title="Demonstração do Assistente de compras" allowfullscreen></iframe></div>
+         ou
+         <div class="video preenchido"><video src="videos/compras.mp4" controls preload="metadata"></video></div>
+    ============================================================= -->
+    <div class="video surge">
+      <div><div class="play"></div><strong>Da foto da nota à análise</strong><span>vídeo de demonstração em breve</span></div>
+    </div>
 
-        <!-- =========================================================
-             VÍDEO DO ASSISTENTE DE COMPRAS
-             Mesmo jeito do vídeo da Central: troque o bloco abaixo por um iframe do YouTube
-             (https://www.youtube.com/embed/ID_DO_VIDEO) ou por <video src="videos/compras.mp4" controls></video>,
-             dentro de <div class="video preenchido" style="--c: var(--p1)"> ... </div>
-        ========================================================== -->
-        <div class="video surge" style="--c: var(--p1)">
-          <div>
-            <div class="play"></div>
-            <strong>Vídeo de demonstração</strong>
-            <span>em breve: da foto da nota até a análise com IA</span>
-          </div>
-        </div>
-      </div>
+    <div class="fluxo">
+      <div class="etapa surge"><div class="bola">1</div><div><div class="quem">Entrada</div><h3>Foto da nota</h3><p>Câmera do celular ou upload.</p></div></div>
+      <div class="etapa surge"><div class="bola">2</div><div><div class="quem">Código + IA</div><h3>Leitura</h3><p>QR da Sefaz primeiro; senão, modelo de visão.</p></div></div>
+      <div class="etapa surge"><div class="bola">3</div><div><div class="quem">Código</div><h3>Conferência</h3><p>Quantidade × preço e a soma precisam fechar.</p></div></div>
+      <div class="etapa surge"><div class="bola">4</div><div><div class="quem">IA</div><h3>Padronização</h3><p>"LTE COND" vira leite condensado.</p></div></div>
+      <div class="etapa surge"><div class="bola">5</div><div><div class="quem">Código + IA</div><h3>Despensa e análise</h3><p>Lista pronta e dicas pela meta.</p></div></div>
+    </div>
 
-      <div class="fluxo">
-        <div class="passo surge" style="--c:var(--p2)"><div class="quem">📷 Entrada</div><b>1. Foto da nota</b><span>Câmera do celular ou upload.</span></div>
-        <div class="seta" style="--c:var(--p1)">→</div>
-        <div class="passo surge" style="--c:var(--p1)"><div class="quem">⚙️ Código + 🤖 IA</div><b>2. Leitura</b><span>QR da Sefaz primeiro; se não der, modelo de visão.</span></div>
-        <div class="seta" style="--c:var(--p1)">→</div>
-        <div class="passo surge" style="--c:#c2185b"><div class="quem">⚙️ Código</div><b>3. Conferência</b><span>Quantidade × preço e soma da nota precisam fechar.</span></div>
-        <div class="seta" style="--c:var(--p1)">→</div>
-        <div class="passo surge" style="--c:var(--p3)"><div class="quem">🤖 IA</div><b>4. Padronização</b><span>"LTE COND SEMIDESN" vira leite condensado.</span></div>
-        <div class="seta" style="--c:var(--p1)">→</div>
-        <div class="passo surge" style="--c:#9c27b0"><div class="quem">⚙️ + 🤖</div><b>5. Despensa e análise</b><span>Lista de compras, "preciso comprar?" e dicas pela meta.</span></div>
-      </div>
+    <div class="numeros">
+      <div class="surge"><span class="n"><em>78%</em></span><span>das fotos de notas lidas com a conta fechando</span></div>
+      <div class="surge"><span class="n">64 → 90%</span><span>de nomes certos ao trocar o modelo</span></div>
+      <div class="surge"><span class="n">200</span><span>compras em 2 anos no perfil de demonstração</span></div>
+      <div class="surge"><span class="n">R$ 42</span><span>por mês de economia sugerida e conferida</span></div>
+    </div>
 
-      <div class="numeros" style="--c: var(--p1)">
-        <div class="surge"><span class="num">78%</span><span>das fotos de notas lidas com a conta fechando (40 de 51)</span></div>
-        <div class="surge" style="--c: var(--p3)"><span class="num">64→90%</span><span>de nomes certos ao trocar o modelo de padronização</span></div>
-        <div class="surge" style="--c: var(--p2)"><span class="num">200</span><span>compras em 2 anos no perfil de demonstração</span></div>
-        <div class="surge" style="--c: #9c27b0"><span class="num">R$ 42</span><span>por mês de economia sugerida, conferida em código</span></div>
-      </div>
-
-      <div class="decisoes">
-        <div class="decisao surge"><div class="emoji">🧾</div><h3>Nota que não fecha não entra calada</h3>
-          <p>As 11 fotos com erro de leitura foram pegas pela conferência, em vez de sujar o histórico.</p></div>
-        <div class="decisao surge"><div class="emoji">🔐</div><h3>Privacidade desde o desenho</h3>
-          <p>CPF nunca é lido, o mercado vira apelido e item de farmácia não é enviado com nome à IA.</p></div>
-        <div class="decisao surge"><div class="emoji">🗣️</div><h3>Resposta explicável</h3>
-          <p>"Você comprou 1 leite em 14/11 e costuma durar ~9 dias." O "acabou" ou "ainda tenho" ajusta a próxima previsão.</p></div>
-      </div>
+    <div class="decisoes">
+      <div class="decisao surge"><span class="emoji">🧾</span><h3>Nota que não fecha não entra calada</h3><p>As 11 fotos com erro de leitura foram pegas pela conferência, em vez de sujar o histórico.</p></div>
+      <div class="decisao surge"><span class="emoji">🔐</span><h3>Privacidade desde o desenho</h3><p>CPF nunca é lido, o mercado vira apelido e remédio não vai com nome para a IA.</p></div>
+      <div class="decisao surge"><span class="emoji">🗣️</span><h3>Resposta que se explica</h3><p>"Você comprou leite em 14/11 e costuma durar 9 dias." O "acabou" ajusta a próxima previsão.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ======================================================= APRENDIZADOS -->
-<section id="aprendizados">
+<!-- ================================================================ ERROS -->
+<section class="secao faixa escura" id="aprendizados">
   <div class="envelope">
-    <span class="rotulo">O que deu errado</span>
-    <h2>E o que mudou por causa disso</h2>
-    <p class="sub">Construir com IA é medir, errar rápido e corrigir com evidência. Alguns exemplos reais dos dois projetos:</p>
-
+    <div class="cabeca">
+      <div>
+        <span class="etiqueta rosa">04 / O que deu errado</span>
+        <h2 class="serif" style="color:#fff">Errar rápido, <em>corrigir com evidência.</em></h2>
+      </div>
+      <p>Construir com IA é medir, errar e ajustar. Quatro erros reais e o que mudou por causa de cada um.</p>
+    </div>
     <div class="erros">
-      <div class="erro surge" style="--c: var(--r1)"><div class="tag">Reviews</div><div>
-        <h3>O modelo esquecia de assinar a resposta</h3>
-        <p>Em 43 de 45 respostas. <b>Mudança:</b> a assinatura passou a ser colocada pelo código. Nem tudo precisa ser prompt.</p></div></div>
-      <div class="erro surge" style="--c: var(--r1)"><div class="tag">Reviews</div><div>
-        <h3>A IA classificava casos graves como leves</h3>
-        <p><b>Mudança:</b> uma regra determinística força a escalada em saúde, segurança e ameaça. Ela pegou 6 casos.</p></div></div>
-      <div class="erro surge" style="--c: var(--p1)"><div class="tag">Compras</div><div>
-        <h3>"Batata: costuma durar 171 dias"</h3>
-        <p>A recorrência misturava dados de outras pessoas e tirava padrão de 2 compras. <b>Mudança:</b> só dados da própria pessoa, 3 compras no mínimo e limites por tipo de alimento.</p></div></div>
-      <div class="erro surge" style="--c: var(--p1)"><div class="tag">Compras</div><div>
-        <h3>A primeira análise ignorou o maior gasto</h3>
-        <p>Elogiou hortifrúti (4,6%) e esqueceu higiene (30%). <b>Mudança:</b> o prompt exige prioridade pelo que mais pesa e números em cada afirmação.</p></div></div>
+      <div class="erro surge"><span class="idx">01</span><div><span class="projeto-tag r">Central de reviews</span><h3>O modelo esquecia de assinar as respostas.</h3></div>
+        <p>Aconteceu em 43 de 45 respostas. <b>Mudança:</b> a assinatura passou a ser colocada pelo código. Nem tudo precisa ser prompt.</p></div>
+      <div class="erro surge"><span class="idx">02</span><div><span class="projeto-tag r">Central de reviews</span><h3>A IA classificava casos graves como leves.</h3></div>
+        <p><b>Mudança:</b> uma regra determinística força a escalada em saúde, segurança e ameaça. Ela pegou 6 casos que a IA deixaria passar.</p></div>
+      <div class="erro surge"><span class="idx">03</span><div><span class="projeto-tag c">Assistente de compras</span><h3>"Batata: costuma durar 171 dias."</h3></div>
+        <p>A recorrência misturava dados de outras pessoas e via padrão em 2 compras. <b>Mudança:</b> só dados da própria pessoa, 3 compras no mínimo e limites por tipo de alimento.</p></div>
+      <div class="erro surge"><span class="idx">04</span><div><span class="projeto-tag c">Assistente de compras</span><h3>A primeira análise ignorou o maior gasto.</h3></div>
+        <p>Elogiou hortifrúti (4,6%) e esqueceu higiene (30%). <b>Mudança:</b> o prompt exige prioridade pelo que mais pesa e números em cada afirmação.</p></div>
     </div>
   </div>
 </section>
 
-<!-- ======================================================= PRINCÍPIOS -->
-<section>
-  <div class="envelope">
-    <span class="rotulo">Como eu trabalho</span>
-    <h2>Quatro princípios que se repetem</h2>
-    <div class="principios" style="margin-top: 30px">
-      <div class="principio surge"><span class="num">01</span><div><h3>Medir antes de confiar</h3><p>Gabarito, métrica e comparação entre versões antes de colocar qualquer prompt em uso.</p></div></div>
-      <div class="principio surge"><span class="num">02</span><div><h3>O código confere a IA</h3><p>Matemática, regras de risco e promessas proibidas ficam em código, não na boa vontade do modelo.</p></div></div>
-      <div class="principio surge"><span class="num">03</span><div><h3>Custo sob controle</h3><p>Cache, modelo local para desenvolver e estimativa de custo antes de qualquer lote.</p></div></div>
-      <div class="principio surge"><span class="num">04</span><div><h3>Mostrar o limite</h3><p>Avisos de amostra pequena, dados sintéticos identificados e uma seção honesta do que deu errado.</p></div></div>
+<!-- ================================================================ JEITO DE TRABALHAR -->
+<section class="secao">
+  <div class="envelope jeito">
+    <div>
+      <span class="etiqueta vinho">05 / Como eu trabalho</span>
+      <h2 class="serif">Estratégia que <em>roda em código.</em></h2>
+      <ol class="principios">
+        <li><b>Medir antes de confiar</b><span>Gabarito e métrica antes de colocar um prompt em uso.</span></li>
+        <li><b>O código confere a IA</b><span>Contas, riscos e promessas proibidas ficam em regra, não na boa vontade do modelo.</span></li>
+        <li><b>Custo sob controle</b><span>Cache, modelo local e estimativa de custo antes de qualquer lote.</span></li>
+        <li><b>Mostrar o limite</b><span>Amostra pequena avisada, dado sintético identificado.</span></li>
+      </ol>
     </div>
-  </div>
-</section>
-
-<!-- ======================================================= STACK -->
-<section style="padding-top: 20px">
-  <div class="envelope">
-    <span class="rotulo">Ferramentas</span>
-    <h2>Stack usada</h2>
-    <div class="stack" style="margin-top: 24px">
-      <span style="--c: var(--r1)">Python</span>
-      <span style="--c: var(--r3)">pandas</span>
-      <span style="--c: #e0a100">Pydantic</span>
-      <span style="--c: var(--p3)">litellm</span>
-      <span style="--c: var(--p1)">Gemini (API)</span>
-      <span style="--c: var(--roxo)">Ollama · Qwen local</span>
-      <span style="--c: var(--r1)">Streamlit</span>
-      <span style="--c: var(--r3)">Altair</span>
-      <span style="--c: #e0a100">pydeck</span>
-      <span style="--c: var(--p3)">OpenCV · leitura de QR</span>
-      <span style="--c: var(--p1)">pytest</span>
-      <span style="--c: var(--verde)">uv</span>
+    <div class="citacao surge">
+      <span class="aspas">“</span>
+      <p>IA boa não é a que acerta sempre. É a que sabe a hora de chamar uma pessoa.</p>
+      <span class="mao">Yasmin ✿</span>
+    </div>
+    <div>
+      <span class="etiqueta vinho">06 / Ferramentas</span>
+      <div class="ferramentas">
+        <span class="cheia">Python</span><span>pandas</span><span>Pydantic</span><span class="amarela">litellm</span>
+        <span class="cheia">Gemini</span><span>Ollama · Qwen</span><span>Streamlit</span><span>Altair</span>
+        <span>pydeck</span><span class="amarela">OpenCV</span><span>pytest</span><span>uv</span><span>Git</span>
+      </div>
+      <p class="mao" style="margin-top: 26px; color: var(--rosa-forte)">trocar de modelo? uma linha de configuração ↗</p>
     </div>
   </div>
 </section>
 
 </main>
 
-<!-- ======================================================= CONTATO -->
-<footer id="contato">
+<!-- ================================================================ CONTATO -->
+<section class="convite faixa" id="contato">
+  <svg class="estrela" viewBox="0 0 100 100" aria-hidden="true"><g stroke="#ffd3e3" stroke-width="7" stroke-linecap="round"><line x1="50" y1="6" x2="50" y2="94"/><line x1="6" y1="50" x2="94" y2="50"/><line x1="19" y1="19" x2="81" y2="81"/><line x1="81" y1="19" x2="19" y2="81"/></g></svg>
   <div class="envelope">
-    <div class="contato">
-      <h2>Vamos conversar sobre IA que resolve problema de verdade?</h2>
-      <p>Os dois projetos estão no ar e o código está aberto. Teste, explore e me chame para conversar.</p>
-      <div class="botoes">
-        <!-- TROQUE pelos seus links -->
-        <a class="botao" href="https://www.linkedin.com/in/SEU_PERFIL" target="_blank" rel="noopener">💼 LinkedIn</a>
-        <a class="botao" href="https://github.com/yasmin-rs" target="_blank" rel="noopener">🐙 GitHub</a>
-        <a class="botao" href="mailto:SEU_EMAIL">✉️ E-mail</a>
-      </div>
+    <div>
+      <span class="etiqueta" style="color: var(--ameixa)">07 / Você + IA = algo útil</span>
+      <h2 class="serif">Tem um problema? <em>Vamos resolver com IA.</em></h2>
     </div>
-    <p class="rodape">Projetos de portfólio com dados públicos, sem vínculo com as marcas citadas nos datasets.</p>
+    <div class="contatos">
+      <a href="mailto:yasssminribeirosantos@gmail.com"><span class="ic">✉</span>yasssminribeirosantos@gmail.com</a>
+      <a href="https://www.linkedin.com/in/yasminribeirosantos" target="_blank" rel="noopener"><span class="ic">in</span>linkedin.com/in/yasminribeirosantos</a>
+      <a href="https://github.com/yasmin-rs" target="_blank" rel="noopener"><span class="ic">⌘</span>github.com/yasmin-rs</a>
+    </div>
+  </div>
+</section>
+
+<footer class="faixa escura">
+  <div class="envelope">
+    <a class="logo" href="#inicio"><span class="mono">Y<b>S</b>.</span><span class="nome">Yasmin Santos<small>AI Builder · IA aplicada a negócios</small></span></a>
+    <nav>
+      <a href="#central">Projetos</a>
+      <a href="#aprendizados">Aprendizados</a>
+      <a href="#contato">Contato ↗</a>
+    </nav>
+    <small>Projetos de portfólio com dados públicos, sem vínculo com as marcas dos datasets.</small>
   </div>
 </footer>
 
 <script>
-  // animação de entrada: cada bloco aparece ao entrar na tela
+  // cada bloco aparece com suavidade ao entrar na tela
   (function () {
     var itens = document.querySelectorAll('.surge');
-    if (!('IntersectionObserver' in window)) {
-      itens.forEach(function (el) { el.classList.add('visivel'); });
-      return;
-    }
+    if (!('IntersectionObserver' in window)) { itens.forEach(function (el) { el.classList.add('visivel'); }); return; }
     var obs = new IntersectionObserver(function (entradas) {
-      entradas.forEach(function (e) {
-        if (e.isIntersecting) { e.target.classList.add('visivel'); obs.unobserve(e.target); }
-      });
+      entradas.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visivel'); obs.unobserve(e.target); } });
     }, { threshold: 0.12 });
     itens.forEach(function (el) { obs.observe(el); });
   })();
